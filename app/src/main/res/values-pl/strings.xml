@@ -5,4 +5,27 @@
     <string name="title_worklist">List prac</string>
     <string name="title_summary">Podsumowanie</string>
     <string name="title_calculator">Kalkulator</string>
+    <string name="workDetails_totalTime">Całkowity czas pracy</string>
+    <string name="workDetails_averageTime">Średni czas pracy na dzień</string>
+    <string name="workDetails_totalSalary">Całkowite wynagrodzenie</string>
+    <string name="workDetails_averageHourlyWage">Średnia stawka godzinowa</string>
+    <string name="workDetails_daysWork">Dni w pracy</string>
+    <string name="workDetails_hoursWorked">Przepracowane godziny</string>
+    <string name="format_hourPerDay">%1$s h/dzień</string>
+    <string name="addWorkTime_time">Czas</string>
+    <string name="addWorkTime_to">Do</string>
+    <string name="addWorkTime_from">Od</string>
+    <string name="addWorkTime_amountTime">Ilość czasu</string>
+    <string name="addWorkTime_date">Data</string>
+    <string name="addWorkTime_additional_info">Dodatkowe informacje</string>
+    <string name="addWorkTime_forAll">Za wszystko</string>
+    <string name="addWorkTime_moneyPerHour">Za godzinę</string>
+    <string name="addWorkTime_money">Pieniądze</string>
+    <string name="global_add">Dodaj</string>
+    <string name="global_cancel">Anuluj</string>
+    <string name="title_addWorkTime">Dodaj do %1$s</string>
+    <string name="global_hour">Godziny</string>
+    <string name="global_minute">Minuty</string>
+    <string name="global_ok">OK</string>
+    <string name="error_unknown">Wystąpił nieznany błąd.</string>
 </resources>

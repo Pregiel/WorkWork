@@ -1,6 +1,7 @@
 package pl.pregiel.workwork;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import pl.pregiel.workwork.fragments.AddWorkTimeFragment;
 import pl.pregiel.workwork.fragments.SummaryFragment;
 import pl.pregiel.workwork.fragments.WorkDetailsFragment;
 import pl.pregiel.workwork.fragments.WorkListFragment;
@@ -46,15 +48,24 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            WorkDetailsFragment currentFragment = (WorkDetailsFragment) getSupportFragmentManager().findFragmentByTag("WORK_DETAILS");
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
 
-            System.out.println("ta");
-            if (currentFragment != null && currentFragment.isVisible()) {
+            if (currentFragment instanceof WorkDetailsFragment) {
                 Fragment fragment = new WorkListFragment();
                 displaySelectedFragment(fragment);
-            } else {
-                super.onBackPressed();
+                return;
+            } else if (currentFragment instanceof AddWorkTimeFragment) {
+                Fragment fragment = getSupportFragmentManager().findFragmentByTag(WorkDetailsFragment.TAG);
+                if (fragment == null) {
+                    fragment = new WorkListFragment();
+                } else {
+                    ((WorkDetailsFragment) fragment).setTitle();
+                }
+                displaySelectedFragment(fragment);
+                return;
             }
+            super.onBackPressed();
+
         }
     }
 
@@ -82,7 +93,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;

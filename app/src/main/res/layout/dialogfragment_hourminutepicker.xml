@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linearLayout_hourMinutePicker_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="12dp"
+        android:paddingEnd="6dp"
+        android:paddingStart="6dp"
+        android:paddingTop="12dp">
+
+        <TextView
+            android:id="@+id/textView_hourMinutePicker_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/format_hourWithSuffix"
+            android:textAllCaps="false"
+            android:textColor="?android:attr/textColorPrimaryInverse"
+            android:textSize="48sp" />
+
+        <TextView
+            android:id="@+id/textView_hourMinutePicker_minute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/format_minuteWithSuffix"
+            android:textColor="?android:attr/textColorPrimaryInverse"
+            android:textSize="48sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_hourMinutePicker_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout_hourMinutePicker_header"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/global_hour"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <NumberPicker
+                android:id="@+id/numberPicker_hourAndMinutePicker_hour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/global_minute"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <NumberPicker
+                android:id="@+id/numberPicker_hourAndMinutePicker_minute"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_hourMinutePicker_bottomBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/linearLayout_hourMinutePicker_center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_hourMinutePicker_cancel"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/global_cancel" />
+
+        <Button
+            android:id="@+id/button_hourMinutePicker_ok"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/global_ok" />
+    </LinearLayout>
+</RelativeLayout>

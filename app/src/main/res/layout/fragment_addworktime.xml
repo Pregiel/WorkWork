@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:orientation="vertical"
+    android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/editText_addWorkTime_date"
+            android:padding="4dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:text="@string/addWorkTime_date"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editText_addWorkTime_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:ems="6"
+            android:inputType="date"
+            android:textAlignment="center"
+            tools:ignore="KeyboardInaccessibleWidget" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="4dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:text="@string/addWorkTime_time"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButton_addWorkTime_rangeTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:checked="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:labelFor="@id/editText_addWorkTime_from"
+            android:text="@string/addWorkTime_from" />
+
+        <EditText
+            android:id="@+id/editText_addWorkTime_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="false"
+            tools:ignore="KeyboardInaccessibleWidget"
+            android:ems="5"
+            android:inputType="time" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:labelFor="@id/editText_addWorkTime_to"
+            android:text="@string/addWorkTime_to" />
+
+        <EditText
+            android:id="@+id/editText_addWorkTime_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="false"
+            tools:ignore="KeyboardInaccessibleWidget"
+            android:ems="5"
+            android:inputType="time" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButton_addWorkTime_amountTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:labelFor="@id/editText_addWorkTime_amount"
+            android:text="@string/addWorkTime_amountTime" />
+
+        <EditText
+            android:id="@+id/editText_addWorkTime_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="false"
+            tools:ignore="KeyboardInaccessibleWidget"
+            android:ems="4"
+            android:inputType="time" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/editText_addWorkTime_salary"
+            android:padding="4dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:text="@string/addWorkTime_money"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editText_addWorkTime_salary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:ems="4"
+            android:inputType="numberDecimal" />
+
+        <Spinner
+            android:id="@+id/spinner_addWorkTime_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:entries="@array/global_currencies" />
+
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/radioGroup_addWorkTime_salaryMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButton_addWorkTime_salaryPerHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:checked="true"
+            android:text="@string/addWorkTime_moneyPerHour" />
+
+        <RadioButton
+            android:id="@+id/radioButton_addWorkTime_salaryForAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/addWorkTime_forAll" />
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:labelFor="@id/editText_addWorkTime_info"
+        android:padding="4dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:text="@string/addWorkTime_additional_info"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editText_addWorkTime_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_addWorkTime_cancel"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:text="@string/global_cancel" />
+
+        <Button
+            android:id="@+id/button_addWorkTime_add"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:text="@string/global_add" />
+    </LinearLayout>
+
+</LinearLayout>

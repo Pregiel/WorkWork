@@ -3,10 +3,12 @@ package pl.pregiel.workwork.data.pojo;
 
 public class WorkTime {
     private Integer id;
+    private String day;
     private Integer time;
     private Integer timeFrom;
     private Integer timeTo;
     private Integer salary;
+    private Integer salaryMode;
     private String notes;
     private Integer workId;
 
@@ -16,6 +18,14 @@ public class WorkTime {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public Integer getTime() {
@@ -48,6 +58,14 @@ public class WorkTime {
 
     public void setSalary(Integer salary) {
         this.salary = salary;
+    }
+
+    public Integer getSalaryMode() {
+        return salaryMode;
+    }
+
+    public void setSalaryMode(Integer salaryMode) {
+        this.salaryMode = salaryMode;
     }
 
     public String getNotes() {

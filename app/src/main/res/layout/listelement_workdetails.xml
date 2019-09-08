@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/listElement_workDetails"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="12dp"
+    android:paddingEnd="5dp"
+    android:paddingStart="5dp"
+    android:paddingTop="12dp">
+
+    <ImageView
+        android:id="@+id/imageView_workListElement_dropDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="6dp"
+        android:contentDescription="Drop down"
+        android:src="@drawable/ic_arrow_drop_down_black_24dp" />
+
+    <TextView
+        android:id="@+id/textView_workListElement_day"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="01.01.2019"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_weight="0"
+        android:gravity="center_vertical"
+        android:text="-"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView_workListElement_hours"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="4 h"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+</LinearLayout>

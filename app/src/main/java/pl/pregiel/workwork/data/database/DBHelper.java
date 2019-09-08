@@ -9,7 +9,7 @@ import pl.pregiel.workwork.data.database.tables.WorkTimes;
 import pl.pregiel.workwork.data.database.tables.Works;
 
 public class DBHelper extends SQLiteOpenHelper {
-    private final static int DB_VERSION = 2;
+    private final static int DB_VERSION = 8;
     private final static String DB_NAME = "WorkWork.db";
 
     public DBHelper(Context context) {
@@ -29,12 +29,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 "CREATE TABLE "
                         + WorkTimes.TABLE_NAME + " ("
                         + WorkTimes.Columns.WORKTIME_ID + " INTEGER PRIMARY KEY, "
-                        + WorkTimes.Columns.WORKTIME_TIME + "INTEGER, "
-                        + WorkTimes.Columns.WORKTIME_TIME_FROM + "INTEGER, "
-                        + WorkTimes.Columns.WORKTIME_TIME_TO + "INTEGER, "
-                        + WorkTimes.Columns.WORKTIME_SALARY + "INTEGER, "
-                        + WorkTimes.Columns.WORKTIME_NOTES + "TEXT, "
-                        + WorkTimes.Columns.WORKTIME_WORK_ID + "INTEGER )"
+                        + WorkTimes.Columns.WORKTIME_DAY + " TEXT, "
+                        + WorkTimes.Columns.WORKTIME_TIME + " INTEGER, "
+                        + WorkTimes.Columns.WORKTIME_TIME_FROM + " INTEGER, "
+                        + WorkTimes.Columns.WORKTIME_TIME_TO + " INTEGER, "
+                        + WorkTimes.Columns.WORKTIME_SALARY + " INTEGER, "
+                        + WorkTimes.Columns.WORKTIME_SALARY_MODE + " INTEGER, "
+                        + WorkTimes.Columns.WORKTIME_NOTES + " TEXT, "
+                        + WorkTimes.Columns.WORKTIME_WORK_ID + " INTEGER )"
 
         );
     }
