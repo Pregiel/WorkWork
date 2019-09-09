@@ -13,12 +13,17 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import pl.pregiel.workwork.R;
+import pl.pregiel.workwork.Utils;
 import pl.pregiel.workwork.adapters.WorkTimeListAdapter;
 import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.database.services.WorkTimeService;
@@ -67,6 +72,24 @@ public class WorkDetailsFragment extends Fragment {
         TextView averageHoursWageText = getActivity().findViewById(R.id.textView_workDetails_averageHourlyWage);
 
         List<WorkTime> workTimeList = workTimeService.getByWorkId(work.getId());
+        Collections.sort(workTimeList, new Comparator<WorkTime>() {
+            @Override
+            public int compare(WorkTime o1, WorkTime o2) {
+                if (!o1.getDay().contentEquals(o2.getDay())) {
+                    try {
+                        Calendar calendar1 = Utils.stringToCalendar(o1.getDay(), "dd.MM.yyyy");
+                        Calendar calendar2 = Utils.stringToCalendar(o2.getDay(), "dd.MM.yyyy");
+                        return calendar1.compareTo(calendar2);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return 0;
+                    }
+                } else {
+                    return o1.getTimeFrom().compareTo(o2.getTimeFrom());
+                }
+            }
+        });
+
         HashMap<String, List<WorkTime>> workTimeByDate = new HashMap<>();
         double totalTime = 0, totalSalary = 0;
 

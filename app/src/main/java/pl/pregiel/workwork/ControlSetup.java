@@ -38,7 +38,7 @@ public class ControlSetup {
                 int initialDay, initialMonth, initialYear;
                 try {
                     initialDay = Integer.valueOf(timeSplit[0]);
-                    initialMonth = Integer.valueOf(timeSplit[1]);
+                    initialMonth = Integer.valueOf(timeSplit[1]) -1;
                     initialYear = Integer.valueOf(timeSplit[2]);
                 } catch (NumberFormatException e) {
                     final Calendar calendar = Calendar.getInstance();

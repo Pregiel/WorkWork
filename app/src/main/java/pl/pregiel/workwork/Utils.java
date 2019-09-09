@@ -7,6 +7,11 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class Utils {
     public static String formatDoubleToString(double value, int precision) {
         return String.format("%." + precision + "f", value);
@@ -73,5 +78,11 @@ public class Utils {
         return false;
     }
 
+    public static Calendar stringToCalendar(String day, String regex) throws ParseException {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat(regex, Locale.ENGLISH);
+        calendar.setTime(dateFormat.parse(day));
+        return calendar;
+    }
 
 }
