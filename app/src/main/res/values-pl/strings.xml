@@ -33,4 +33,7 @@
     <string name="global_title">Tytuł</string>
     <string name="global_defaultSettings">Ustawienia domyślne</string>
     <string name="global_timeToNow">wstecz od <b>teraz</b></string>
+    <string name="title_addWork">Dodaj do listy prac</string>
+    <string name="format_salaryForAll">%1$s %2$s za %3$s godzin</string>
+    <string name="format_salaryPerHour">%1$s %2$s za godzinę</string>
 </resources>

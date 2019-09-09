@@ -31,6 +31,8 @@ public class AddWorkFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         workService = new WorkService(getContext());
+        if (getActivity() != null)
+            getActivity().setTitle(R.string.title_addWork);
     }
 
     @Nullable

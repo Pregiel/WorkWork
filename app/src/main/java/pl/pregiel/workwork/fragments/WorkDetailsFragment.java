@@ -28,23 +28,23 @@ import pl.pregiel.workwork.data.pojo.WorkTime;
 public class WorkDetailsFragment extends Fragment {
     public static final String TAG = "WORK_DETAILS";
 
-    private WorkService workService;
     private WorkTimeService workTimeService;
     private WorkTimeListAdapter workTimeListAdapter;
-    private Bundle arguments;
     private Work work;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        arguments = getArguments();
+        Bundle arguments = getArguments();
 
-        if (getActivity() != null) {
-            getActivity().setTitle(R.string.title_worklist);
-        }
-        workService = new WorkService(getContext());
+        WorkService workService = new WorkService(getContext());
         workTimeService = new WorkTimeService(getContext());
+
+        if (arguments != null) {
+            work = workService.getById(arguments.getInt("work_id", 0));
+        }
+        setTitle();
     }
 
     @Override
@@ -56,8 +56,6 @@ public class WorkDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        work = workService.getById(arguments.getInt("work_id", 0));
 
         if (getActivity() == null || getContext() == null)
             return;
@@ -75,7 +73,7 @@ public class WorkDetailsFragment extends Fragment {
         for (WorkTime workTime : workTimeList) {
             totalTime += workTime.getTime();
             if (workTime.getSalaryMode() == 0)
-                totalSalary += (workTime.getSalary() / 100) * (workTime.getTime()/60);
+                totalSalary += (workTime.getSalary() / 100) * (workTime.getTime() / 60);
             else
                 totalSalary += (workTime.getSalary() / 100);
 
@@ -129,7 +127,7 @@ public class WorkDetailsFragment extends Fragment {
     }
 
     public void setTitle() {
-        if (getActivity()!= null)
+        if (getActivity() != null)
             getActivity().setTitle(work.getTitle());
     }
 }

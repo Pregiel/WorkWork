@@ -11,8 +11,8 @@
     <string name="title_worklist">Work List</string>
     <string name="title_summary">Summary</string>
     <string name="title_calculator">Calculator</string>
-    <string name="workDetails_totalTime">Total work timeAmount</string>
-    <string name="workDetails_averageTime">Average work timeAmount per day</string>
+    <string name="workDetails_totalTime">Total work time</string>
+    <string name="workDetails_averageTime">Average work time per day</string>
     <string name="workDetails_totalSalary">Total salary</string>
     <string name="workDetails_averageHourlyWage">Average hourly wage</string>
     <string name="workDetails_daysWork">Days in work</string>
@@ -24,7 +24,7 @@
     <string name="global_time" >Time</string>
     <string name="global_timeFrom">From</string>
     <string name="global_timeTo" >To</string>
-    <string name="global_timeAmount">Amount of timeAmount</string>
+    <string name="global_timeAmount">Amount of time</string>
     <string name="global_date" >Date</string>
     <string name="global_salary">Salary</string>
     <string name="global_salaryPerHour">Per hour</string>
@@ -50,4 +50,9 @@
     <string name="global_title">Title</string>
     <string name="global_defaultSettings">Default settings</string>
     <string name="global_timeToNow">back from <b>now</b></string>
+    <string name="title_addWork">Add to work list</string>
+    <string name="separator">-</string>
+    <string name="drop_down">Drop down</string>
+    <string name="format_salaryForAll">%1$s %2$s per %3$s hour</string>
+    <string name="format_salaryPerHour">%1$s %2$s per hour</string>
 </resources>

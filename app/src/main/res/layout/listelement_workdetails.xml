@@ -4,48 +4,122 @@
     android:id="@+id/listElement_workDetails"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingBottom="12dp"
+    android:orientation="vertical"
     android:paddingEnd="5dp"
-    android:paddingStart="5dp"
-    android:paddingTop="12dp">
+    android:paddingStart="5dp">
 
-    <ImageView
-        android:id="@+id/imageView_workListElement_dropDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="6dp"
-        android:contentDescription="Drop down"
-        android:src="@drawable/ic_arrow_drop_down_black_24dp" />
-
-    <TextView
-        android:id="@+id/textView_workListElement_day"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout_workDetailsListElement_mainInfo"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:text="01.01.2019"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        android:orientation="horizontal"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_weight="0"
-        android:gravity="center_vertical"
-        android:text="-"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/imageView_workDetailsListElement_dropDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="6dp"
+            android:contentDescription="@string/drop_down"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp" />
 
-    <TextView
-        android:id="@+id/textView_workListElement_hours"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textView_workDetailsListElement_day"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="01.01.2019"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/separator"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textView_workDetailsListElement_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="4 h"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_workDetailsListElement_extraInfo"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:text="4 h"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingEnd="6dp"
+            android:paddingStart="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/global_salary"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView_workDetailsListElement_salaryPerHour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="100 PLN per hour"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView_workDetailsListElement_salaryForAll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="200 PLN per 2 hour"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_workDetailsListElement_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="6dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/global_additionalInfo"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView_workDetailsListElement_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Info"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
