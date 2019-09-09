@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -67,25 +69,39 @@ public class WorkDetailsFragment extends Fragment {
         TextView averageHoursWageText = getActivity().findViewById(R.id.textView_workDetails_averageHourlyWage);
 
         List<WorkTime> workTimeList = workTimeService.getByWorkId(work.getId());
+        HashMap<String, List<WorkTime>> workTimeByDate = new HashMap<>();
         double totalTime = 0, totalSalary = 0;
 
         for (WorkTime workTime : workTimeList) {
             totalTime += workTime.getTime();
-            totalSalary += workTime.getSalary() / 100;
+            if (workTime.getSalaryMode() == 0)
+                totalSalary += (workTime.getSalary() / 100) * (workTime.getTime()/60);
+            else
+                totalSalary += (workTime.getSalary() / 100);
+
+            String day = workTime.getDay();
+            if (workTimeByDate.containsKey(day)) {
+                List<WorkTime> list = workTimeByDate.get(day);
+                list.add(workTime);
+            } else {
+                List<WorkTime> list = new ArrayList<>();
+                list.add(workTime);
+                workTimeByDate.put(day, list);
+            }
         }
 
         totalTime = totalTime / 60;
-        int daysWork = workTimeList.size();
+        int daysWork = workTimeByDate.size();
         double averageTime = totalTime / daysWork;
-        double averageHoursWage = totalSalary / daysWork;
+        double averageHoursWage = totalSalary / totalTime;
 
         totalTimeText.setText(getString(R.string.format_hour, String.format(Locale.getDefault(), "%.2f", totalTime)));
         averageTimeText.setText(getString(R.string.format_hourPerDay, String.format(Locale.getDefault(), "%.2f", averageTime)));
-        daysWorkText.setText(getString(R.string.format_hour, String.valueOf(daysWork)));
+        daysWorkText.setText(getString((daysWork > 1 ? R.string.format_days : R.string.format_day), daysWork));
         //TODO: zmienić walutę
-        totalSalaryText.setText(getString(R.string.format_plnPerHour,
+        totalSalaryText.setText(getString(R.string.format_pln,
                 String.format(Locale.getDefault(), "%.2f", totalSalary), "PLN"));
-        averageHoursWageText.setText(getString(R.string.format_pln,
+        averageHoursWageText.setText(getString(R.string.format_plnPerHour,
                 String.format(Locale.getDefault(), "%.2f", averageHoursWage), "PLN"));
 
         ListView hoursWorkedListView = getActivity().findViewById(R.id.listView_workDetails_hoursWorked);
@@ -103,7 +119,6 @@ public class WorkDetailsFragment extends Fragment {
                 Fragment fragment = new AddWorkTimeFragment();
                 Bundle arguments = new Bundle();
                 arguments.putInt("work_id", work.getId());
-                arguments.putString("work_title", work.getTitle());
                 fragment.setArguments(arguments);
 
                 FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();

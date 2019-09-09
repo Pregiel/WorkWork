@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import pl.pregiel.workwork.R;
 import pl.pregiel.workwork.adapters.WorkListAdapter;
 import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.pojo.Work;
+import pl.pregiel.workwork.utils.ErrorToasts;
 
 public class WorkListFragment extends Fragment {
     private ListView workListView;
@@ -45,7 +48,7 @@ public class WorkListFragment extends Fragment {
         workService = new WorkService(getContext());
         workList = workService.getAll();
 
-        FloatingActionButton fabAdd = getActivity().findViewById(R.id.fab_worklist_add);
+        FloatingActionButton fabAdd = view.findViewById(R.id.fab_worklist_add);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +56,7 @@ public class WorkListFragment extends Fragment {
             }
         });
 
-        workListView = getActivity().findViewById(R.id.listView_workList_list);
+        workListView = view.findViewById(R.id.listView_workList_list);
 
         if (workListAdapter == null) {
             workListAdapter = new WorkListAdapter(getContext(), workList);
@@ -64,11 +67,14 @@ public class WorkListFragment extends Fragment {
     }
 
     public void addWork() {
-        Work work = new Work();
-        work.setTitle(RandomStringUtils.randomAlphanumeric(12));
-
-        workService.create(work);
-        reloadWorkList();
+        if (getContext() != null) {
+            Fragment fragment = new AddWorkFragment();
+            FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.add(R.id.frame, fragment, AddWorkFragment.TAG);
+            fragmentTransaction.commit();
+        } else {
+            ErrorToasts.showUnknownErrorToast(getContext());
+        }
     }
 
     public void removeWork(Work work) {
@@ -82,7 +88,6 @@ public class WorkListFragment extends Fragment {
 
         workListAdapter.notifyDataSetChanged();
     }
-
 
 
 }

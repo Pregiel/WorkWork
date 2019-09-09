@@ -82,9 +82,9 @@ public class WorkListAdapter extends ArrayAdapter<Work> {
 //                addWorkTimeDialogFragment.show(fragmentManager,"dialogFragment_addWorkTime");
 
 //                WorkTime workTime = new WorkTime();
-//                workTime.setTime(120);
+//                workTime.setTimeAmount(120);
 //                workTime.setSalary(25);
-//                workTime.setNotes("none");
+//                workTime.setInfo("none");
 //                workTime.setWorkId(work.getId());
 //
 //                workTimeService.create(workTime);

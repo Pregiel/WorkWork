@@ -12,15 +12,15 @@
     <string name="workDetails_daysWork">Dni w pracy</string>
     <string name="workDetails_hoursWorked">Przepracowane godziny</string>
     <string name="format_hourPerDay">%1$s h/dzień</string>
-    <string name="addWorkTime_time">Czas</string>
-    <string name="addWorkTime_to">Do</string>
-    <string name="addWorkTime_from">Od</string>
-    <string name="addWorkTime_amountTime">Ilość czasu</string>
-    <string name="addWorkTime_date">Data</string>
-    <string name="addWorkTime_additional_info">Dodatkowe informacje</string>
-    <string name="addWorkTime_forAll">Za wszystko</string>
-    <string name="addWorkTime_moneyPerHour">Za godzinę</string>
-    <string name="addWorkTime_money">Pieniądze</string>
+    <string name="global_time">Czas</string>
+    <string name="global_timeTo">Do</string>
+    <string name="global_timeFrom">Od</string>
+    <string name="global_timeAmount">Ilość czasu</string>
+    <string name="global_date">Data</string>
+    <string name="global_additionalInfo">Dodatkowe informacje</string>
+    <string name="global_salaryForAll">Za wszystko</string>
+    <string name="global_salaryPerHour">Za godzinę</string>
+    <string name="global_salary">Wynagrodzenie</string>
     <string name="global_add">Dodaj</string>
     <string name="global_cancel">Anuluj</string>
     <string name="title_addWorkTime">Dodaj do %1$s</string>
@@ -28,4 +28,9 @@
     <string name="global_minute">Minuty</string>
     <string name="global_ok">OK</string>
     <string name="error_unknown">Wystąpił nieznany błąd.</string>
+    <string name="format_day">%1$d dzień</string>
+    <string name="format_days">%1$d dni</string>
+    <string name="global_title">Tytuł</string>
+    <string name="global_defaultSettings">Ustawienia domyślne</string>
+    <string name="global_timeToNow">wstecz od <b>teraz</b></string>
 </resources>

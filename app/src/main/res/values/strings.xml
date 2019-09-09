@@ -11,8 +11,8 @@
     <string name="title_worklist">Work List</string>
     <string name="title_summary">Summary</string>
     <string name="title_calculator">Calculator</string>
-    <string name="workDetails_totalTime">Total work time</string>
-    <string name="workDetails_averageTime">Average work time per day</string>
+    <string name="workDetails_totalTime">Total work timeAmount</string>
+    <string name="workDetails_averageTime">Average work timeAmount per day</string>
     <string name="workDetails_totalSalary">Total salary</string>
     <string name="workDetails_averageHourlyWage">Average hourly wage</string>
     <string name="workDetails_daysWork">Days in work</string>
@@ -21,15 +21,15 @@
     <string name="format_pln" translatable="false">%1$s %2$s</string>
     <string name="format_plnPerHour" translatable="false">%1$s %2$s/h</string>
     <string name="format_hourPerDay" >%1$s h/day</string>
-    <string name="addWorkTime_time" >Time</string>
-    <string name="addWorkTime_from">From</string>
-    <string name="addWorkTime_to" >To</string>
-    <string name="addWorkTime_amountTime">Amount of time</string>
-    <string name="addWorkTime_date" >Date</string>
-    <string name="addWorkTime_money">Money</string>
-    <string name="addWorkTime_moneyPerHour">Per hour</string>
-    <string name="addWorkTime_forAll">For all</string>
-    <string name="addWorkTime_additional_info" >Additional information</string>
+    <string name="global_time" >Time</string>
+    <string name="global_timeFrom">From</string>
+    <string name="global_timeTo" >To</string>
+    <string name="global_timeAmount">Amount of timeAmount</string>
+    <string name="global_date" >Date</string>
+    <string name="global_salary">Salary</string>
+    <string name="global_salaryPerHour">Per hour</string>
+    <string name="global_salaryForAll">For all</string>
+    <string name="global_additionalInfo" >Additional information</string>
     <string name="global_add">Add</string>
     <string name="global_cancel">Cancel</string>
     <string name="title_addWorkTime">Add to %1$s</string>
@@ -42,5 +42,12 @@
     <string name="format_hourWithSuffix" translatable="false">%1$dh</string>
     <string name="format_minuteWithSuffix" translatable="false">%1$dm</string>
     <string name="format_timeWithSuffixes" translatable="false">%1$dh %2$dm</string>
+    <string name="match_timeWithSuffixes" translatable="false">\\d+h \\d+m</string>
     <string name="error_unknown">An unknown error occurred.</string>
+    <string name="format_day">%1$d day</string>
+    <string name="format_days">%1$d days</string>
+    <string name="format_timeRange" translatable="false">(%1$s - %2$s)</string>
+    <string name="global_title">Title</string>
+    <string name="global_defaultSettings">Default settings</string>
+    <string name="global_timeToNow">back from <b>now</b></string>
 </resources>

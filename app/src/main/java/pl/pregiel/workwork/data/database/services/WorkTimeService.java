@@ -27,7 +27,8 @@ public class WorkTimeService {
         contentValues.put(WorkTimes.Columns.WORKTIME_TIME_TO, workTime.getTimeTo());
         contentValues.put(WorkTimes.Columns.WORKTIME_SALARY, workTime.getSalary());
         contentValues.put(WorkTimes.Columns.WORKTIME_SALARY_MODE, workTime.getSalaryMode());
-        contentValues.put(WorkTimes.Columns.WORKTIME_NOTES, workTime.getNotes());
+        contentValues.put(WorkTimes.Columns.WORKTIME_CURRENCY, workTime.getCurrency());
+        contentValues.put(WorkTimes.Columns.WORKTIME_INFO, workTime.getInfo());
         contentValues.put(WorkTimes.Columns.WORKTIME_WORK_ID, workTime.getWorkId());
 
         dbHelper.getWritableDatabase().insert(WorkTimes.TABLE_NAME, null, contentValues);
@@ -87,7 +88,8 @@ public class WorkTimeService {
         contentValues.put(WorkTimes.Columns.WORKTIME_TIME_TO, workTime.getTimeTo());
         contentValues.put(WorkTimes.Columns.WORKTIME_SALARY, workTime.getSalary());
         contentValues.put(WorkTimes.Columns.WORKTIME_SALARY_MODE, workTime.getSalaryMode());
-        contentValues.put(WorkTimes.Columns.WORKTIME_NOTES, workTime.getNotes());
+        contentValues.put(WorkTimes.Columns.WORKTIME_CURRENCY, workTime.getCurrency());
+        contentValues.put(WorkTimes.Columns.WORKTIME_INFO, workTime.getInfo());
         contentValues.put(WorkTimes.Columns.WORKTIME_WORK_ID, workTime.getWorkId());
 
         dbHelper.getWritableDatabase().update(WorkTimes.TABLE_NAME,
@@ -111,7 +113,8 @@ public class WorkTimeService {
         int timeToColumnId = cursor.getColumnIndex(WorkTimes.Columns.WORKTIME_TIME_TO);
         int salaryColumnId = cursor.getColumnIndex(WorkTimes.Columns.WORKTIME_SALARY);
         int salaryModeColumnId = cursor.getColumnIndex(WorkTimes.Columns.WORKTIME_SALARY_MODE);
-        int notesColumnId = cursor.getColumnIndex(WorkTimes.Columns.WORKTIME_NOTES);
+        int currencyColumnId = cursor.getColumnIndex(WorkTimes.Columns.WORKTIME_CURRENCY);
+        int infoColumnId = cursor.getColumnIndex(WorkTimes.Columns.WORKTIME_INFO);
         int workIdColumnId = cursor.getColumnIndex(WorkTimes.Columns.WORKTIME_WORK_ID);
 
         WorkTime workTime = new WorkTime();
@@ -122,7 +125,8 @@ public class WorkTimeService {
         workTime.setTimeTo(cursor.getInt(timeToColumnId));
         workTime.setSalary(cursor.getInt(salaryColumnId));
         workTime.setSalaryMode(cursor.getInt(salaryModeColumnId));
-        workTime.setNotes(cursor.getString(notesColumnId));
+        workTime.setCurrency(cursor.getInt(currencyColumnId));
+        workTime.setInfo(cursor.getString(infoColumnId));
         workTime.setWorkId(cursor.getInt(workIdColumnId));
         return workTime;
     }

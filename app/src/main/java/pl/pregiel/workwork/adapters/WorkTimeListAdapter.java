@@ -37,7 +37,18 @@ public class WorkTimeListAdapter extends ArrayAdapter<WorkTime> {
             dayText.setText(workTime.getDay());
 
             final TextView hoursText = convertView.findViewById(R.id.textView_workListElement_hours);
-            hoursText.setText(Utils.formatTime(getContext(), workTime.getTime()));
+            if (workTime.getTimeFrom() > -1 && workTime.getTimeTo() > -1) {
+                StringBuilder builder = new StringBuilder();
+                builder.append(Utils.formatTimeAmount(getContext(), workTime.getTime()))
+                        .append(" ")
+                        .append(String.format(getContext().getString(R.string.format_timeRange),
+                                Utils.timeMinutesToString(getContext(), workTime.getTimeFrom()),
+                                Utils.timeMinutesToString(getContext(), workTime.getTimeTo())));
+                hoursText.setText(builder);
+            } else {
+                hoursText.setText(Utils.formatTimeAmount(getContext(), workTime.getTime()));
+            }
+
 
         }
         return convertView;

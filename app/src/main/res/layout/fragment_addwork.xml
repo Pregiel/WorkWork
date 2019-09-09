@@ -15,33 +15,39 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:labelFor="@id/editText_addWorkTime_date"
+            android:labelFor="@id/editText_addWork_title"
             android:padding="4dp"
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:text="@string/global_date"
+            android:text="@string/global_title"
             android:textColor="@color/colorAccent"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editText_addWorkTime_date"
-            android:layout_width="wrap_content"
+            android:id="@+id/editText_addWork_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:clickable="true"
-            android:focusable="false"
             android:ems="6"
-            android:inputType="date"
-            android:textAlignment="center"
-            tools:ignore="KeyboardInaccessibleWidget" />
+            android:inputType="text"
+            android:textAlignment="center" />
 
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
+        android:padding="4dp"
+        android:text="@string/global_defaultSettings"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:padding="4dp"
         android:paddingEnd="8dp"
         android:paddingStart="8dp"
@@ -56,7 +62,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioButton_addWorkTime_rangeTime"
+            android:id="@+id/radioButton_addWork_rangeTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="6dp"
@@ -67,38 +73,70 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
-            android:labelFor="@id/editText_addWorkTime_from"
+            android:labelFor="@id/editText_addWork_from"
             android:text="@string/global_timeFrom" />
 
         <EditText
-            android:id="@+id/editText_addWorkTime_from"
+            android:id="@+id/editText_addWork_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:focusable="false"
-            tools:ignore="KeyboardInaccessibleWidget"
             android:ems="5"
-            android:inputType="time" />
+            android:focusable="false"
+            android:inputType="time"
+            tools:ignore="KeyboardInaccessibleWidget" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
-            android:labelFor="@id/editText_addWorkTime_to"
+            android:labelFor="@id/editText_addWork_to"
             android:text="@string/global_timeTo" />
 
         <EditText
-            android:id="@+id/editText_addWorkTime_to"
+            android:id="@+id/editText_addWork_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:focusable="false"
-            tools:ignore="KeyboardInaccessibleWidget"
             android:ems="5"
-            android:inputType="time" />
+            android:focusable="false"
+            android:inputType="time"
+            tools:ignore="KeyboardInaccessibleWidget" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButton_addWork_toNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp" />
+
+        <EditText
+            android:id="@+id/editText_addWork_toNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:ems="4"
+            android:focusable="false"
+            android:inputType="time"
+            tools:ignore="KeyboardInaccessibleWidget" />
+
+        <TextView
+            android:id="@+id/textView_addWork_toNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:labelFor="@id/editText_addWork_toNow"
+            android:text="@string/global_timeToNow" />
 
     </LinearLayout>
 
@@ -109,7 +147,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioButton_addWorkTime_amountTime"
+            android:id="@+id/radioButton_addWork_amountTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="6dp" />
@@ -119,18 +157,18 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
-            android:labelFor="@id/editText_addWorkTime_amount"
+            android:labelFor="@id/editText_addWork_amount"
             android:text="@string/global_timeAmount" />
 
         <EditText
-            android:id="@+id/editText_addWorkTime_amount"
+            android:id="@+id/editText_addWork_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:focusable="false"
-            tools:ignore="KeyboardInaccessibleWidget"
             android:ems="4"
-            android:inputType="time" />
+            android:focusable="false"
+            android:inputType="time"
+            tools:ignore="KeyboardInaccessibleWidget" />
 
     </LinearLayout>
 
@@ -143,7 +181,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:labelFor="@id/editText_addWorkTime_salary"
+            android:labelFor="@id/editText_addWork_salary"
             android:padding="4dp"
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
@@ -153,7 +191,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editText_addWorkTime_salary"
+            android:id="@+id/editText_addWork_salary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -163,7 +201,7 @@
             android:inputType="numberDecimal" />
 
         <Spinner
-            android:id="@+id/spinner_addWorkTime_currency"
+            android:id="@+id/spinner_addWork_currency"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:entries="@array/global_currencies" />
@@ -171,14 +209,14 @@
     </LinearLayout>
 
     <RadioGroup
-        android:id="@+id/radioGroup_addWorkTime_salaryMode"
+        android:id="@+id/radioGroup_addWork_salaryMode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioButton_addWorkTime_salaryPerHour"
+            android:id="@+id/radioButton_addWork_salaryPerHour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -186,7 +224,7 @@
             android:text="@string/global_salaryPerHour" />
 
         <RadioButton
-            android:id="@+id/radioButton_addWorkTime_salaryForAll"
+            android:id="@+id/radioButton_addWork_salaryForAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -198,7 +236,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:labelFor="@id/editText_addWorkTime_info"
+        android:labelFor="@id/editText_addWork_info"
         android:padding="4dp"
         android:paddingEnd="8dp"
         android:paddingStart="8dp"
@@ -208,7 +246,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editText_addWorkTime_info"
+        android:id="@+id/editText_addWork_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -221,7 +259,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button_addWorkTime_cancel"
+            android:id="@+id/button_addWork_cancel"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -230,7 +268,7 @@
             android:text="@string/global_cancel" />
 
         <Button
-            android:id="@+id/button_addWorkTime_add"
+            android:id="@+id/button_addWork_add"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

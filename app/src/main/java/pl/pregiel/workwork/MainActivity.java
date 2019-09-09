@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import pl.pregiel.workwork.fragments.AddWorkFragment;
 import pl.pregiel.workwork.fragments.AddWorkTimeFragment;
 import pl.pregiel.workwork.fragments.SummaryFragment;
 import pl.pregiel.workwork.fragments.WorkDetailsFragment;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
 
-            if (currentFragment instanceof WorkDetailsFragment) {
+            if (currentFragment instanceof WorkDetailsFragment || currentFragment instanceof AddWorkFragment) {
                 Fragment fragment = new WorkListFragment();
                 displaySelectedFragment(fragment);
                 return;
@@ -65,7 +66,6 @@ public class MainActivity extends AppCompatActivity
                 return;
             }
             super.onBackPressed();
-
         }
     }
 

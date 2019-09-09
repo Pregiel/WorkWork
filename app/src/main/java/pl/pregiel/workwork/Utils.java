@@ -17,8 +17,15 @@ public class Utils {
         return String.format("%.2f", value);
     }
 
-    public static String formatTime(Context context, int minutes) {
+    public static String formatTimeAmount(Context context, int minutes) {
         return context.getString(R.string.format_hour, formatDoubleToString(minutes / 60));
+    }
+
+    public static String timeMinutesToString(Context context, int minutes) {
+        int hour = minutes / 60;
+        int minute = minutes % 60;
+
+        return context.getString(R.string.format_time, hour, minute);
     }
 
     public static int timeStringToMinutes(String time) throws NumberFormatException {
@@ -28,6 +35,13 @@ public class Utils {
         int minute = Integer.valueOf(timeSplit[1]);
 
         return hour * 60 + minute;
+    }
+
+    public static String timeMinutesToStringWithSuffixes(Context context, int minutes) {
+        int hour = minutes / 60;
+        int minute = minutes % 60;
+
+        return context.getString(R.string.format_timeWithSuffixes, hour, minute);
     }
 
     public static int timeStringWithSuffixesToMinutes(String time) throws NumberFormatException {
@@ -58,4 +72,6 @@ public class Utils {
         }
         return false;
     }
+
+
 }

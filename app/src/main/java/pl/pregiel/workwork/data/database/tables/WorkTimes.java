@@ -12,7 +12,8 @@ public interface WorkTimes {
         String WORKTIME_TIME_TO = "time_to";
         String WORKTIME_SALARY = "salary";
         String WORKTIME_SALARY_MODE = "salary_mode";
-        String WORKTIME_NOTES = "notes";
+        String WORKTIME_CURRENCY = "currency";
+        String WORKTIME_INFO = "info";
         String WORKTIME_WORK_ID = "work_id";
     }
 }
