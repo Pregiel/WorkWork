@@ -96,9 +96,9 @@ public class WorkDetailsFragment extends Fragment {
         for (WorkTime workTime : workTimeList) {
             totalTime += workTime.getTime();
             if (workTime.getSalaryMode() == 0)
-                totalSalary += (workTime.getSalary() / 100) * (workTime.getTime() / 60);
+                totalSalary += ((double) workTime.getSalary() / 100) * ((double) workTime.getTime() / 60);
             else
-                totalSalary += (workTime.getSalary() / 100);
+                totalSalary += ((double) workTime.getSalary() / 100);
 
             String day = workTime.getDay();
             if (workTimeByDate.containsKey(day)) {

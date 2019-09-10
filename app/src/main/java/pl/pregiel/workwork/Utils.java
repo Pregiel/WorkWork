@@ -27,8 +27,8 @@ public class Utils {
     }
 
     public static String timeMinutesToString(Context context, int minutes) {
-        int hour = minutes / 60;
-        int minute = minutes % 60;
+        int hour = Math.abs(minutes) / 60;
+        int minute = Math.abs(minutes) % 60;
 
         return context.getString(R.string.format_time, hour, minute);
     }
@@ -43,8 +43,8 @@ public class Utils {
     }
 
     public static String timeMinutesToStringWithSuffixes(Context context, int minutes) {
-        int hour = minutes / 60;
-        int minute = minutes % 60;
+        int hour = Math.abs(minutes) / 60;
+        int minute = Math.abs(minutes) % 60;
 
         return context.getString(R.string.format_timeWithSuffixes, hour, minute);
     }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.pregiel.workwork.data.database.DBHelper;
+import pl.pregiel.workwork.data.database.tables.WorkTimes;
 import pl.pregiel.workwork.data.database.tables.Works;
 import pl.pregiel.workwork.data.pojo.Work;
 
@@ -87,6 +88,10 @@ public class WorkService {
     }
 
     public void deleteById(final Integer id) {
+        dbHelper.getWritableDatabase().delete(WorkTimes.TABLE_NAME,
+                " " + WorkTimes.Columns.WORKTIME_WORK_ID + " = ? ",
+                new String[]{id.toString()});
+
         dbHelper.getWritableDatabase().delete(Works.TABLE_NAME,
                 " " + Works.Columns.WORK_ID + " = ? ",
                 new String[]{id.toString()});

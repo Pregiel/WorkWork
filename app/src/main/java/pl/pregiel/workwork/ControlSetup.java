@@ -184,8 +184,6 @@ public class ControlSetup {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-//                    for (RadioButton checkedRadioButton : radioButtons) {
-//                        if (buttonView.getId() == checkedRadioButton.getId()) {
                     for (RadioButton radioButton : radioButtons) {
                         if (buttonView.getId() == radioButton.getId()) {
                             if (setDisabled) {
@@ -202,9 +200,6 @@ public class ControlSetup {
                             }
                         }
                     }
-//                            break;
-//                        }
-//                    }
                 }
             }
         };
@@ -220,6 +215,10 @@ public class ControlSetup {
             }
         }
 
+    }
+
+    public static void setupSalaryEditText(@NonNull final EditText editText, double defaultValue) {
+        setupSalaryEditText(editText, Utils.formatDoubleToString(defaultValue));
     }
 
     public static void setupSalaryEditText(@NonNull final EditText editText, String defaultValue) {

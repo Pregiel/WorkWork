@@ -57,4 +57,10 @@
     <string name="format_salaryPerHour">%1$s %2$s per hour</string>
     <string name="error_emptyField">%1$s field can\'t be empty!</string>
     <string name="error_tooShortField">%1$s field must contain at least %2$d chars!</string>
+    <string name="action_open">Open</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_addWorkTime">Add</string>
+    <string name="title_updateWork">Update %1$s</string>
+    <string name="global_update">Update</string>
 </resources>

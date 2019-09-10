@@ -15,28 +15,32 @@ import android.widget.Spinner;
 
 import pl.pregiel.workwork.ControlSetup;
 import pl.pregiel.workwork.R;
-import pl.pregiel.workwork.Settings;
 import pl.pregiel.workwork.Utils;
 import pl.pregiel.workwork.ValidationConst;
 import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.pojo.Work;
 import pl.pregiel.workwork.exceptions.EmptyFieldException;
+import pl.pregiel.workwork.exceptions.ShowToastException;
 import pl.pregiel.workwork.exceptions.TooShortFieldException;
 import pl.pregiel.workwork.utils.ErrorToasts;
-import pl.pregiel.workwork.exceptions.ShowToastException;
 
 
-public class AddWorkFragment extends Fragment {
-    public static final String TAG = "ADD_WORK";
+public class UpdateWorkFragment extends Fragment {
+    public static final String TAG = "UPDATE_WORK";
 
     private WorkService workService;
+    private Work work;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle arguments = getArguments();
         workService = new WorkService(getContext());
-        if (getActivity() != null)
-            getActivity().setTitle(R.string.title_addWork);
+
+        if (arguments != null && getActivity() != null) {
+            work = workService.getById(arguments.getInt("work_id"));
+            getActivity().setTitle(getString(R.string.title_updateWork, "tak"));
+        }
     }
 
     @Nullable
@@ -50,38 +54,55 @@ public class AddWorkFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final EditText titleEditText = view.findViewById(R.id.editText_addWork_title);
+        titleEditText.setText(work.getTitle());
 
         final EditText timeFromEditText = view.findViewById(R.id.editText_addWork_from);
-        ControlSetup.setupTimePicker(getContext(), timeFromEditText, 8, 0);
+        ControlSetup.setupTimePicker(getContext(), timeFromEditText, work.getTimeFrom());
 
         final EditText timeToEditText = view.findViewById(R.id.editText_addWork_to);
-        ControlSetup.setupTimePicker(getContext(), timeToEditText, 16, 0);
+        ControlSetup.setupTimePicker(getContext(), timeToEditText, work.getTimeTo());
 
         final EditText timeToNowEditText = view.findViewById(R.id.editText_addWork_toNow);
-        ControlSetup.setupTimeAmountPicker(getContext(), timeToNowEditText, 1, 0);
+        ControlSetup.setupTimeAmountPicker(getContext(), timeToNowEditText, work.getTimeToNow());
 
         final EditText timeAmountEditText = view.findViewById(R.id.editText_addWork_amount);
-        ControlSetup.setupTimeAmountPicker(getContext(), timeAmountEditText, 8, 0);
+        ControlSetup.setupTimeAmountPicker(getContext(), timeAmountEditText, work.getTimeAmount());
 
         final RadioButton timeRangeRadioButton = view.findViewById(R.id.radioButton_addWork_rangeTime);
         final RadioButton timeToNowRadioButton = view.findViewById(R.id.radioButton_addWork_toNow);
         final RadioButton timeAmountRadioButton = view.findViewById(R.id.radioButton_addWork_amountTime);
-        ControlSetup.setupCustomRadioButtonGroup(false, timeRangeRadioButton, timeToNowRadioButton, timeAmountRadioButton);
+        ControlSetup.setupCustomRadioButtonGroup(false, timeRangeRadioButton, timeAmountRadioButton, timeToNowRadioButton);
+        if (work.getTimeMode() == 0) {
+            timeRangeRadioButton.setChecked(true);
+        } else if (work.getTimeMode() == 1) {
+            timeAmountRadioButton.setChecked(true);
+        } else {
+            timeToNowRadioButton.setChecked(true);
+        }
 
         final EditText salaryEditText = view.findViewById(R.id.editText_addWork_salary);
-        ControlSetup.setupSalaryEditText(salaryEditText, Settings.DEFAULT_HOURLY_WAGE);
+        ControlSetup.setupSalaryEditText(salaryEditText, (double) work.getSalary() / 100);
 
         final RadioButton salaryPerHourRadioButton = view.findViewById(R.id.radioButton_addWork_salaryPerHour);
+        final RadioButton salaryForAllRadioButton = view.findViewById(R.id.radioButton_addWork_salaryForAll);
+        if (work.getSalaryMode() == 0) {
+            salaryPerHourRadioButton.setChecked(true);
+        } else {
+            salaryForAllRadioButton.setChecked(true);
+        }
+
+        final Spinner currencySpinner = view.findViewById(R.id.spinner_addWork_currency);
+        currencySpinner.setSelection(work.getCurrency());
 
         final EditText infoEditText = view.findViewById(R.id.editText_addWork_info);
-        final Spinner currencySpinner = view.findViewById(R.id.spinner_addWork_currency);
+        infoEditText.setText(work.getInfo());
 
         final Button addButton = view.findViewById(R.id.button_addWork_add);
+        addButton.setText(R.string.global_update);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    Work work = new Work();
 
                     String titleString = titleEditText.getText().toString();
                     if (titleString.length() < ValidationConst.TITLE_MINIMUM_LENGTH) {
@@ -118,7 +139,7 @@ public class AddWorkFragment extends Fragment {
                     work.setCurrency(currencySpinner.getSelectedItemPosition());
                     work.setInfo(infoEditText.getText().toString());
 
-                    workService.create(work);
+                    workService.update(work);
 
                     if (getContext() != null) {
                         ((FragmentActivity) getContext()).onBackPressed();

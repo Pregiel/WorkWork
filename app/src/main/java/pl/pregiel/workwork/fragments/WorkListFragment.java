@@ -45,6 +45,10 @@ public class WorkListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if (getContext() == null) {
+            return;
+        }
+
         workService = new WorkService(getContext());
         workList = workService.getAll();
 
@@ -60,6 +64,12 @@ public class WorkListFragment extends Fragment {
 
         if (workListAdapter == null) {
             workListAdapter = new WorkListAdapter(getContext(), workList);
+            workListAdapter.setRefreshWorkListRunnable(new Runnable() {
+                @Override
+                public void run() {
+                    reloadWorkList();
+                }
+            });
             workListView.setAdapter(workListAdapter);
         }
 

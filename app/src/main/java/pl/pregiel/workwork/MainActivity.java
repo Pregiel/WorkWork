@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import pl.pregiel.workwork.fragments.AddWorkFragment;
 import pl.pregiel.workwork.fragments.AddWorkTimeFragment;
 import pl.pregiel.workwork.fragments.SummaryFragment;
+import pl.pregiel.workwork.fragments.UpdateWorkFragment;
 import pl.pregiel.workwork.fragments.WorkDetailsFragment;
 import pl.pregiel.workwork.fragments.WorkListFragment;
 
@@ -51,7 +52,9 @@ public class MainActivity extends AppCompatActivity
         } else {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
 
-            if (currentFragment instanceof WorkDetailsFragment || currentFragment instanceof AddWorkFragment) {
+            if (currentFragment instanceof WorkDetailsFragment
+                    || currentFragment instanceof AddWorkFragment
+                    || currentFragment instanceof UpdateWorkFragment) {
                 Fragment fragment = new WorkListFragment();
                 displaySelectedFragment(fragment);
                 return;
