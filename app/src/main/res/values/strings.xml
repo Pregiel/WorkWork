@@ -51,8 +51,10 @@
     <string name="global_defaultSettings">Default settings</string>
     <string name="global_timeToNow">back from <b>now</b></string>
     <string name="title_addWork">Add to work list</string>
-    <string name="separator">-</string>
-    <string name="drop_down">Drop down</string>
+    <string name="separator" translatable="false">-</string>
+    <string name="drop_down" translatable="false">Drop down</string>
     <string name="format_salaryForAll">%1$s %2$s per %3$s hour</string>
     <string name="format_salaryPerHour">%1$s %2$s per hour</string>
+    <string name="error_emptyField">%1$s field can\'t be empty!</string>
+    <string name="error_tooShortField">%1$s field must contain at least %2$d chars!</string>
 </resources>

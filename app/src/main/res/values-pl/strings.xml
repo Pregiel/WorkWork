@@ -36,4 +36,6 @@
     <string name="title_addWork">Dodaj do listy prac</string>
     <string name="format_salaryForAll">%1$s %2$s za %3$s godzin</string>
     <string name="format_salaryPerHour">%1$s %2$s za godzinę</string>
+    <string name="error_emptyField">"Pole %1$s nie może być puste! "</string>
+    <string name="error_tooShortField">Pole %1$s musi zawierać co najmniej %2$d znaków!</string>
 </resources>

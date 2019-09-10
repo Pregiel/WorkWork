@@ -22,6 +22,8 @@ import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.database.services.WorkTimeService;
 import pl.pregiel.workwork.data.pojo.Work;
 import pl.pregiel.workwork.data.pojo.WorkTime;
+import pl.pregiel.workwork.exceptions.EmptyFieldException;
+import pl.pregiel.workwork.exceptions.ShowToastException;
 import pl.pregiel.workwork.utils.ErrorToasts;
 
 
@@ -111,6 +113,10 @@ public class AddWorkTimeFragment extends Fragment {
                         workTime.setTime(timeAmountInMinutes);
                     }
 
+                    if (salaryEditText.getText().toString().isEmpty()) {
+                        throw new EmptyFieldException(getString(R.string.global_salary));
+                    }
+
                     int salary = Math.round(Float.valueOf(salaryEditText.getText().toString()) * 100);
                     workTime.setSalary(salary);
                     workTime.setSalaryMode(salaryPerHourRadioButton.isChecked() ? 0 : 1);
@@ -119,11 +125,13 @@ public class AddWorkTimeFragment extends Fragment {
                     workTime.setWorkId(work.getId());
 
                     workTimeService.create(workTime);
+                    if (getContext() != null) {
+                        ((FragmentActivity) getContext()).onBackPressed();
+                    }
+                } catch (ShowToastException e) {
+                    e.showToast(getContext());
                 } catch (Exception e) {
                     ErrorToasts.showUnknownErrorToast(getContext());
-                }
-                if (getContext() != null) {
-                    ((FragmentActivity) getContext()).onBackPressed();
                 }
             }
         });

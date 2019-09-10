@@ -12,14 +12,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import pl.pregiel.workwork.ControlSetup;
 import pl.pregiel.workwork.R;
 import pl.pregiel.workwork.Settings;
 import pl.pregiel.workwork.Utils;
+import pl.pregiel.workwork.ValidationConst;
 import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.pojo.Work;
+import pl.pregiel.workwork.exceptions.EmptyFieldException;
+import pl.pregiel.workwork.exceptions.TooShortFieldException;
+import pl.pregiel.workwork.utils.ErrorToasts;
+import pl.pregiel.workwork.exceptions.ShowToastException;
 
 
 public class AddWorkFragment extends Fragment {
@@ -79,6 +83,10 @@ public class AddWorkFragment extends Fragment {
                 try {
                     Work work = new Work();
 
+                    String titleString = titleEditText.getText().toString();
+                    if (titleString.length() < ValidationConst.TITLE_MINIMUM_LENGTH) {
+                        throw new TooShortFieldException(getString(R.string.global_title), ValidationConst.TITLE_MINIMUM_LENGTH);
+                    }
                     work.setTitle(titleEditText.getText().toString());
 
                     if (timeRangeRadioButton.isChecked()) {
@@ -99,18 +107,26 @@ public class AddWorkFragment extends Fragment {
                     work.setTimeAmount(timeAmountInMinutes);
                     work.setTimeToNow(-timeToNowInMinutes);
 
-                    int salary = Math.round(Float.valueOf(salaryEditText.getText().toString()) * 100);
+                    String salaryString = salaryEditText.getText().toString();
+                    if (salaryString.isEmpty()) {
+                        throw new EmptyFieldException(getString(R.string.global_salary));
+                    }
+
+                    int salary = Math.round(Float.valueOf(salaryString) * 100);
                     work.setSalary(salary);
                     work.setSalaryMode(salaryPerHourRadioButton.isChecked() ? 0 : 1);
                     work.setCurrency(currencySpinner.getSelectedItemPosition());
                     work.setInfo(infoEditText.getText().toString());
 
                     workService.create(work);
+
+                    if (getContext() != null) {
+                        ((FragmentActivity) getContext()).onBackPressed();
+                    }
+                } catch (ShowToastException e) {
+                    e.showToast(getContext());
                 } catch (Exception e) {
-                    Toast.makeText(getContext(), R.string.error_unknown, Toast.LENGTH_LONG).show();
-                }
-                if (getContext() != null) {
-                    ((FragmentActivity) getContext()).onBackPressed();
+                    ErrorToasts.showUnknownErrorToast(getContext());
                 }
             }
         });
