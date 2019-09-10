@@ -20,7 +20,7 @@
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
             android:text="@string/global_date"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/secondaryColor"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -46,7 +46,7 @@
         android:paddingEnd="8dp"
         android:paddingStart="8dp"
         android:text="@string/global_time"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/secondaryColor"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -68,18 +68,19 @@
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
             android:labelFor="@id/editText_addWorkTime_from"
-            android:text="@string/global_timeFrom" />
+            android:text="@string/global_timeFrom"
+            android:textSize="@dimen/form_concatLabel" />
 
         <EditText
             android:id="@+id/editText_addWorkTime_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:clickable="true"
+            android:ems="4"
             android:focusable="false"
-            tools:ignore="KeyboardInaccessibleWidget"
-            android:ems="5"
-            android:inputType="time" />
+            android:inputType="time"
+            android:textAlignment="center"
+            tools:ignore="KeyboardInaccessibleWidget" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -87,18 +88,19 @@
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
             android:labelFor="@id/editText_addWorkTime_to"
-            android:text="@string/global_timeTo" />
+            android:text="@string/global_timeTo"
+            android:textSize="@dimen/form_concatLabel" />
 
         <EditText
             android:id="@+id/editText_addWorkTime_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:clickable="true"
+            android:ems="4"
             android:focusable="false"
-            tools:ignore="KeyboardInaccessibleWidget"
-            android:ems="5"
-            android:inputType="time" />
+            android:inputType="time"
+            android:textAlignment="center"
+            tools:ignore="KeyboardInaccessibleWidget" />
 
     </LinearLayout>
 
@@ -120,17 +122,19 @@
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
             android:labelFor="@id/editText_addWorkTime_amount"
-            android:text="@string/global_timeAmount" />
+            android:text="@string/global_timeAmount"
+            android:textSize="@dimen/form_concatLabel" />
 
         <EditText
             android:id="@+id/editText_addWorkTime_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:focusable="false"
-            tools:ignore="KeyboardInaccessibleWidget"
             android:ems="4"
-            android:inputType="time" />
+            android:focusable="false"
+            android:inputType="time"
+            android:textAlignment="center"
+            tools:ignore="KeyboardInaccessibleWidget" />
 
     </LinearLayout>
 
@@ -148,9 +152,17 @@
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
             android:text="@string/global_salary"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/secondaryColor"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/editText_addWorkTime_salary"
@@ -158,16 +170,16 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="12dp"
-            android:layout_weight="1"
-            android:ems="4"
-            android:inputType="numberDecimal" />
+            android:ems="5"
+            android:inputType="numberDecimal"
+            android:textAlignment="center" />
 
         <Spinner
             android:id="@+id/spinner_addWorkTime_currency"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:entries="@array/global_currencies" />
-
+            android:entries="@array/global_currencies"
+            android:theme="@style/MySpinnerTheme" />
     </LinearLayout>
 
     <RadioGroup
@@ -203,7 +215,7 @@
         android:paddingEnd="8dp"
         android:paddingStart="8dp"
         android:text="@string/global_additionalInfo"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/secondaryColor"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -222,21 +234,23 @@
 
         <Button
             android:id="@+id/button_addWorkTime_cancel"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="8dp"
-            android:text="@string/global_cancel" />
-
-        <Button
-            android:id="@+id/button_addWorkTime_add"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="8dp"
-            android:text="@string/global_add" />
+            android:text="@string/global_cancel"
+            android:textColor="@color/secondaryDarkColor" />
+
+        <Button
+            android:id="@+id/button_addWorkTime_add"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:text="@string/global_add"
+            android:textColor="@color/secondaryDarkColor" />
     </LinearLayout>
 
 </LinearLayout>

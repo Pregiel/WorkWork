@@ -21,8 +21,8 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_add_black_24dp"
-        android:tint="@android:color/background_light"
-        app:backgroundTint="@color/colorAccent" />
+        android:tint="@color/secondaryTextColor"
+        app:backgroundTint="@color/secondaryColor" />
 
 
 

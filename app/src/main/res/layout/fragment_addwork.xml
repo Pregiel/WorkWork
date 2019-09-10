@@ -20,16 +20,16 @@
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
             android:text="@string/global_title"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/secondaryColor"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editText_addWork_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:ems="6"
+            android:ems="10"
             android:inputType="text"
             android:textAlignment="center" />
 
@@ -52,7 +52,7 @@
         android:paddingEnd="8dp"
         android:paddingStart="8dp"
         android:text="@string/global_time"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/secondaryColor"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -80,11 +80,11 @@
             android:id="@+id/editText_addWork_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:clickable="true"
-            android:ems="5"
+            android:ems="4"
             android:focusable="false"
             android:inputType="time"
+            android:textAlignment="center"
             tools:ignore="KeyboardInaccessibleWidget" />
 
         <TextView
@@ -99,11 +99,11 @@
             android:id="@+id/editText_addWork_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:clickable="true"
-            android:ems="5"
+            android:ems="4"
             android:focusable="false"
             android:inputType="time"
+            android:textAlignment="center"
             tools:ignore="KeyboardInaccessibleWidget" />
 
     </LinearLayout>
@@ -127,6 +127,7 @@
             android:ems="4"
             android:focusable="false"
             android:inputType="time"
+            android:textAlignment="center"
             tools:ignore="KeyboardInaccessibleWidget" />
 
         <TextView
@@ -168,6 +169,7 @@
             android:ems="4"
             android:focusable="false"
             android:inputType="time"
+            android:textAlignment="center"
             tools:ignore="KeyboardInaccessibleWidget" />
 
     </LinearLayout>
@@ -186,9 +188,17 @@
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
             android:text="@string/global_salary"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/secondaryColor"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/editText_addWork_salary"
@@ -196,16 +206,16 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="12dp"
-            android:layout_weight="1"
-            android:ems="4"
-            android:inputType="numberDecimal" />
+            android:ems="5"
+            android:inputType="numberDecimal"
+            android:textAlignment="center" />
 
         <Spinner
             android:id="@+id/spinner_addWork_currency"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:entries="@array/global_currencies" />
-
+            android:entries="@array/global_currencies"
+            android:theme="@style/MySpinnerTheme" />
     </LinearLayout>
 
     <RadioGroup
@@ -241,7 +251,7 @@
         android:paddingEnd="8dp"
         android:paddingStart="8dp"
         android:text="@string/global_additionalInfo"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/secondaryColor"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -265,7 +275,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="8dp"
-            android:text="@string/global_cancel" />
+            android:text="@string/global_cancel"
+            android:textColor="@color/secondaryDarkColor" />
 
         <Button
             android:id="@+id/button_addWork_add"
@@ -274,7 +285,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="8dp"
-            android:text="@string/global_add" />
+            android:text="@string/global_add"
+            android:textColor="@color/secondaryDarkColor" />
     </LinearLayout>
 
 </LinearLayout>

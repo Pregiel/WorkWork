@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="100 PLN per hour"
-                    android:textColor="@color/colorTextPrimary"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="16sp" />
 
                 <TextView
@@ -93,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="200 PLN per 2 hour"
-                    android:textColor="@color/colorTextPrimary"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
@@ -116,7 +116,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Info"
-                android:textColor="@color/colorTextPrimary"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="16sp" />
         </LinearLayout>
 
