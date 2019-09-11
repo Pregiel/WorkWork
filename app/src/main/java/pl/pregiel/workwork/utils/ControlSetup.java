@@ -1,4 +1,4 @@
-package pl.pregiel.workwork;
+package pl.pregiel.workwork.utils;
 
 
 import android.app.DatePickerDialog;
@@ -20,9 +20,10 @@ import android.widget.TimePicker;
 
 import java.util.Calendar;
 
+import pl.pregiel.workwork.R;
+import pl.pregiel.workwork.Utils;
 import pl.pregiel.workwork.fragments.dialogFragments.HourAndMinutePickerDialogFragment;
 import pl.pregiel.workwork.listeners.TextListener;
-import pl.pregiel.workwork.utils.CustomAlert;
 
 public class ControlSetup {
 

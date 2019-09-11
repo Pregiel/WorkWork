@@ -34,8 +34,8 @@ import pl.pregiel.workwork.data.pojo.WorkTime;
 import pl.pregiel.workwork.utils.CustomAlert;
 import pl.pregiel.workwork.utils.FragmentOpener;
 
-public class WorkDetailsFragment extends Fragment {
-    public static final String TAG = "WORK_DETAILS";
+public class WorkDetailsFragment extends Fragment implements TaggedFragment {
+    public static final String FRAGMENT_TAG = "WORK_DETAILS";
 
     private WorkService workService;
     private WorkTimeService workTimeService;
@@ -80,12 +80,12 @@ public class WorkDetailsFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_workDetails_add:
                 FragmentOpener.openFragment((FragmentActivity) getContext(),
-                        new AddWorkTimeFragment(), AddWorkTimeFragment.TAG, FragmentOpener.OpenMode.ADD, work);
+                        new AddWorkTimeFragment(), FragmentOpener.OpenMode.ADD, work);
                 break;
 
             case R.id.action_workDetails_edit:
                 FragmentOpener.openFragment((FragmentActivity) getContext(),
-                        new UpdateWorkFragment(), UpdateWorkFragment.TAG, FragmentOpener.OpenMode.ADD, work);
+                        new UpdateWorkFragment(), FragmentOpener.OpenMode.ADD, work);
                 break;
 
             case R.id.action_workDetails_delete:
@@ -95,7 +95,7 @@ public class WorkDetailsFragment extends Fragment {
                             public void run() {
                                 workService.deleteById(work.getId());
                                 FragmentOpener.openFragment((FragmentActivity) getContext(),
-                                        new WorkListFragment(), WorkListFragment.TAG, FragmentOpener.OpenMode.REPLACE);
+                                        new WorkListFragment(),  FragmentOpener.OpenMode.REPLACE);
                             }
                         },
                         R.string.global_cancel, null).show();
@@ -134,7 +134,7 @@ public class WorkDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentOpener.openFragment((FragmentActivity) getContext(),
-                        new AddWorkTimeFragment(), AddWorkTimeFragment.TAG, FragmentOpener.OpenMode.ADD, work);
+                        new AddWorkTimeFragment(), FragmentOpener.OpenMode.ADD, work);
             }
         });
     }
@@ -230,5 +230,10 @@ public class WorkDetailsFragment extends Fragment {
         work = workService.getById(workId);
         reloadWorkTimeList();
         updateDetails();
+    }
+
+    @Override
+    public String getFragmentTag() {
+        return FRAGMENT_TAG;
     }
 }

@@ -7,13 +7,12 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import pl.pregiel.workwork.ControlSetup;
+import pl.pregiel.workwork.utils.ControlSetup;
 import pl.pregiel.workwork.R;
 import pl.pregiel.workwork.Utils;
 import pl.pregiel.workwork.data.database.services.WorkService;
@@ -22,12 +21,11 @@ import pl.pregiel.workwork.data.pojo.Work;
 import pl.pregiel.workwork.data.pojo.WorkTime;
 import pl.pregiel.workwork.exceptions.EmptyFieldException;
 import pl.pregiel.workwork.exceptions.ShowToastException;
-import pl.pregiel.workwork.utils.CustomAlert;
 import pl.pregiel.workwork.utils.ErrorToasts;
 
 
-public class UpdateWorkTimeFragment extends FormFragment {
-    public static final String TAG = "UPDATE_WORKTIME";
+public class UpdateWorkTimeFragment extends FormFragment  implements TaggedFragment {
+    public static final String FRAGMENT_TAG = "UPDATE_WORKTIME";
 
     private WorkService workService;
     private WorkTimeService workTimeService;
@@ -165,5 +163,10 @@ public class UpdateWorkTimeFragment extends FormFragment {
                 }
             }
         });
+    }
+
+    @Override
+    public String getFragmentTag() {
+        return FRAGMENT_TAG;
     }
 }

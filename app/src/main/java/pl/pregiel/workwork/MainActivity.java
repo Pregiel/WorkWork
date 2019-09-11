@@ -2,8 +2,6 @@ package pl.pregiel.workwork;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,14 +13,18 @@ import android.view.MenuItem;
 
 import pl.pregiel.workwork.fragments.AddWorkFragment;
 import pl.pregiel.workwork.fragments.AddWorkTimeFragment;
+import pl.pregiel.workwork.fragments.TaggedFragment;
 import pl.pregiel.workwork.fragments.SummaryFragment;
 import pl.pregiel.workwork.fragments.UpdateWorkFragment;
 import pl.pregiel.workwork.fragments.UpdateWorkTimeFragment;
 import pl.pregiel.workwork.fragments.WorkDetailsFragment;
 import pl.pregiel.workwork.fragments.WorkListFragment;
+import pl.pregiel.workwork.utils.FragmentOpener;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = "MAIN_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +41,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         navigationView.setCheckedItem(R.id.nav_worklist);
-        Fragment fragment = new WorkListFragment();
-        displaySelectedFragment(fragment);
+
+        if (savedInstanceState == null) {
+            TaggedFragment fragment = new WorkListFragment();
+            FragmentOpener.openFragment(getSupportFragmentManager(), fragment, FragmentOpener.OpenMode.REPLACE);
+        }
     }
 
     @Override
@@ -51,24 +55,24 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
+            android.support.v4.app.Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
 
             if (currentFragment instanceof WorkDetailsFragment
                     || currentFragment instanceof AddWorkFragment) {
-                Fragment fragment = new WorkListFragment();
-                displaySelectedFragment(fragment);
+                TaggedFragment fragment = new WorkListFragment();
+                FragmentOpener.openFragment(getSupportFragmentManager(), fragment, FragmentOpener.OpenMode.REPLACE);
                 return;
             } else if (currentFragment instanceof AddWorkTimeFragment
                     || currentFragment instanceof UpdateWorkFragment
                     || currentFragment instanceof UpdateWorkTimeFragment) {
-                Fragment fragment = getSupportFragmentManager().findFragmentByTag(WorkDetailsFragment.TAG);
+                TaggedFragment fragment = (TaggedFragment) getSupportFragmentManager().findFragmentByTag(WorkDetailsFragment.FRAGMENT_TAG);
                 if (fragment == null) {
                     fragment = new WorkListFragment();
                 } else {
                     ((WorkDetailsFragment) fragment).setTitle();
                     ((WorkDetailsFragment) fragment).reload();
                 }
-                displaySelectedFragment(fragment);
+                FragmentOpener.openFragment(getSupportFragmentManager(), fragment, FragmentOpener.OpenMode.REPLACE);
                 return;
             }
             super.onBackPressed();
@@ -96,7 +100,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        Fragment fragment = null;
+        TaggedFragment fragment = null;
         if (id == R.id.nav_worklist) {
             fragment = new WorkListFragment();
         } else if (id == R.id.nav_summary) {
@@ -105,15 +109,9 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        displaySelectedFragment(fragment);
+        FragmentOpener.openFragment(getSupportFragmentManager(), fragment, FragmentOpener.OpenMode.REPLACE);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void displaySelectedFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame, fragment);
-        fragmentTransaction.commit();
     }
 }

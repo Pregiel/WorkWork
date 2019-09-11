@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import pl.pregiel.workwork.ControlSetup;
+import pl.pregiel.workwork.utils.ControlSetup;
 import pl.pregiel.workwork.R;
 import pl.pregiel.workwork.Utils;
 import pl.pregiel.workwork.ValidationConst;
@@ -24,8 +24,8 @@ import pl.pregiel.workwork.exceptions.TooShortFieldException;
 import pl.pregiel.workwork.utils.ErrorToasts;
 
 
-public class UpdateWorkFragment extends FormFragment {
-    public static final String TAG = "UPDATE_WORK";
+public class UpdateWorkFragment extends FormFragment implements TaggedFragment {
+    public static final String FRAGMENT_TAG = "UPDATE_WORK";
 
     private WorkService workService;
     private Work work;
@@ -161,5 +161,10 @@ public class UpdateWorkFragment extends FormFragment {
                 }
             }
         });
+    }
+
+    @Override
+    public String getFragmentTag() {
+        return FRAGMENT_TAG;
     }
 }

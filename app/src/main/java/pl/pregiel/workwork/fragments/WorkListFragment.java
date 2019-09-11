@@ -6,14 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
-
-import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.List;
 
@@ -21,11 +17,10 @@ import pl.pregiel.workwork.R;
 import pl.pregiel.workwork.adapters.WorkListAdapter;
 import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.pojo.Work;
-import pl.pregiel.workwork.utils.ErrorToasts;
 import pl.pregiel.workwork.utils.FragmentOpener;
 
-public class WorkListFragment extends Fragment {
-    public static final String TAG = "WORK_LIST";
+public class WorkListFragment extends Fragment implements TaggedFragment {
+    public static final String FRAGMENT_TAG = "WORK_LIST";
 
     private ListView workListView;
     private WorkService workService;
@@ -60,7 +55,7 @@ public class WorkListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentOpener.openFragment((FragmentActivity) getContext(),
-                        new AddWorkFragment(), AddWorkFragment.TAG, FragmentOpener.OpenMode.ADD );
+                        new AddWorkFragment(),  FragmentOpener.OpenMode.ADD );
             }
         });
 
@@ -88,4 +83,8 @@ public class WorkListFragment extends Fragment {
     }
 
 
+    @Override
+    public String getFragmentTag() {
+        return FRAGMENT_TAG;
+    }
 }

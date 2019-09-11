@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import pl.pregiel.workwork.ControlSetup;
+import pl.pregiel.workwork.utils.ControlSetup;
 import pl.pregiel.workwork.R;
 import pl.pregiel.workwork.Settings;
 import pl.pregiel.workwork.Utils;
@@ -25,8 +25,8 @@ import pl.pregiel.workwork.exceptions.ShowToastException;
 import pl.pregiel.workwork.utils.ErrorToasts;
 
 
-public class AddWorkTimeFragment extends FormFragment {
-    public static final String TAG = "ADD_WORKTIME";
+public class AddWorkTimeFragment extends FormFragment implements TaggedFragment {
+    public static final String FRAGMENT_TAG = "ADD_WORKTIME";
 
     private WorkTimeService workTimeService;
     private WorkService workService;
@@ -151,5 +151,10 @@ public class AddWorkTimeFragment extends FormFragment {
                 }
             }
         });
+    }
+
+    @Override
+    public String getFragmentTag() {
+        return FRAGMENT_TAG;
     }
 }

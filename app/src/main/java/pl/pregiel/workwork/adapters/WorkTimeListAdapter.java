@@ -24,7 +24,6 @@ import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.database.services.WorkTimeService;
 import pl.pregiel.workwork.data.pojo.Work;
 import pl.pregiel.workwork.data.pojo.WorkTime;
-import pl.pregiel.workwork.fragments.AddWorkTimeFragment;
 import pl.pregiel.workwork.fragments.UpdateWorkTimeFragment;
 import pl.pregiel.workwork.utils.CustomAlert;
 import pl.pregiel.workwork.utils.FragmentOpener;
@@ -150,7 +149,7 @@ public class WorkTimeListAdapter extends ArrayAdapter<WorkTime> {
                 switch (item.getItemId()) {
                     case R.id.action_workDetailsListElement_edit:
                         FragmentOpener.openFragment((FragmentActivity) getContext(),
-                                new UpdateWorkTimeFragment(), UpdateWorkTimeFragment.TAG, FragmentOpener.OpenMode.ADD, workTime);
+                                new UpdateWorkTimeFragment(), FragmentOpener.OpenMode.ADD, workTime);
                         return true;
                     case R.id.action_workDetailsListElement_delete:
                         CustomAlert.buildAlert(getContext(), R.string.action_delete, R.string.alert_areYouSure,

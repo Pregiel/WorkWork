@@ -1,9 +1,7 @@
 package pl.pregiel.workwork.adapters;
 
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -61,7 +59,7 @@ public class WorkListAdapter extends ArrayAdapter<Work> {
             @Override
             public void onClick(View v) {
                 FragmentOpener.openFragment((FragmentActivity) getContext(),
-                        new WorkDetailsFragment(), WorkDetailsFragment.TAG, FragmentOpener.OpenMode.REPLACE, work);
+                        new WorkDetailsFragment(), FragmentOpener.OpenMode.REPLACE, work);
             }
         });
 
@@ -79,7 +77,7 @@ public class WorkListAdapter extends ArrayAdapter<Work> {
             @Override
             public void onClick(View v) {
                 FragmentOpener.openFragment((FragmentActivity) getContext(),
-                        new AddWorkTimeFragment(), AddWorkTimeFragment.TAG, FragmentOpener.OpenMode.REPLACE, work);
+                        new AddWorkTimeFragment(), FragmentOpener.OpenMode.REPLACE, work);
             }
         });
 
@@ -96,15 +94,15 @@ public class WorkListAdapter extends ArrayAdapter<Work> {
                 switch (item.getItemId()) {
                     case R.id.action_workListElement_open:
                         FragmentOpener.openFragment((FragmentActivity) getContext(),
-                                new WorkDetailsFragment(), WorkDetailsFragment.TAG, FragmentOpener.OpenMode.REPLACE, work);
+                                new WorkDetailsFragment(), FragmentOpener.OpenMode.REPLACE, work);
                         return true;
                     case R.id.action_workListElement_add:
                         FragmentOpener.openFragment((FragmentActivity) getContext(),
-                                new AddWorkTimeFragment(), AddWorkTimeFragment.TAG, FragmentOpener.OpenMode.REPLACE, work);
+                                new AddWorkTimeFragment(), FragmentOpener.OpenMode.REPLACE, work);
                         return true;
                     case R.id.action_workListElement_edit:
                         FragmentOpener.openFragment((FragmentActivity) getContext(),
-                                new UpdateWorkFragment(), UpdateWorkFragment.TAG, FragmentOpener.OpenMode.REPLACE, work);
+                                new UpdateWorkFragment(), FragmentOpener.OpenMode.REPLACE, work);
                         return true;
                     case R.id.action_workListElement_delete:
                         CustomAlert.buildAlert(getContext(), R.string.action_delete, R.string.alert_areYouSure,
