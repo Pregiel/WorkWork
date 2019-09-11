@@ -16,31 +16,36 @@ import pl.pregiel.workwork.ControlSetup;
 import pl.pregiel.workwork.R;
 import pl.pregiel.workwork.Settings;
 import pl.pregiel.workwork.Utils;
+import pl.pregiel.workwork.ValidationConst;
 import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.database.services.WorkTimeService;
 import pl.pregiel.workwork.data.pojo.Work;
 import pl.pregiel.workwork.data.pojo.WorkTime;
 import pl.pregiel.workwork.exceptions.EmptyFieldException;
 import pl.pregiel.workwork.exceptions.ShowToastException;
+import pl.pregiel.workwork.exceptions.TooShortFieldException;
 import pl.pregiel.workwork.utils.ErrorToasts;
 
 
-public class AddWorkTimeFragment extends FormFragment {
-    public static final String TAG = "ADD_WORKTIME";
+public class UpdateWorkTimeFragment extends FormFragment {
+    public static final String TAG = "UPDATE_WORKTIME";
 
+    private WorkService workService;
     private WorkTimeService workTimeService;
     private Work work;
+    private WorkTime workTime;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle arguments = getArguments();
-        WorkService workService = new WorkService(getContext());
+        workService = new WorkService(getContext());
         workTimeService = new WorkTimeService(getContext());
 
         if (arguments != null && getActivity() != null) {
-            work = workService.getById(arguments.getInt("work_id"));
-            getActivity().setTitle(String.format(getString(R.string.title_addWorkTime), work.getTitle()));
+            workTime = workTimeService.getById(arguments.getInt("worktime_id"));
+            work = workService.getById(workTime.getWorkId());
+            getActivity().setTitle(R.string.global_update);
         }
     }
 
@@ -55,40 +60,52 @@ public class AddWorkTimeFragment extends FormFragment {
         super.onViewCreated(view, savedInstanceState);
 
         final EditText dateEditText = view.findViewById(R.id.editText_addWorkTime_date);
-        ControlSetup.setupDatePicker(getContext(), dateEditText);
+        ControlSetup.setupDatePicker(getContext(), dateEditText, workTime.getDay());
 
         final EditText timeFromEditText = view.findViewById(R.id.editText_addWorkTime_from);
         final EditText timeToEditText = view.findViewById(R.id.editText_addWorkTime_to);
-
-        if (work.getTimeMode() == 1) {
-            ControlSetup.setupTimePickerWithDelay(getContext(), timeFromEditText, work.getTimeToNow());
-            ControlSetup.setupTimePicker(getContext(), timeToEditText);
-        } else {
-            ControlSetup.setupTimePicker(getContext(), timeFromEditText, work.getTimeFrom());
-            ControlSetup.setupTimePicker(getContext(), timeToEditText, work.getTimeTo());
-        }
-
-        final EditText timeAmountEditText = view.findViewById(R.id.editText_addWorkTime_amount);
-        ControlSetup.setupTimeAmountPicker(getContext(), timeAmountEditText, work.getTimeAmount());
 
         final RadioButton timeRangeRadioButton = view.findViewById(R.id.radioButton_addWorkTime_rangeTime);
         final RadioButton timeAmountRadioButton = view.findViewById(R.id.radioButton_addWorkTime_amountTime);
         ControlSetup.setupCustomRadioButtonGroup(timeRangeRadioButton, timeAmountRadioButton);
 
+        if (workTime.getTimeFrom() > -1 && workTime.getTimeTo() > -1) {
+            ControlSetup.setupTimePicker(getContext(), timeFromEditText, workTime.getTimeFrom());
+            ControlSetup.setupTimePicker(getContext(), timeToEditText, workTime.getTimeTo());
+            timeRangeRadioButton.setChecked(true);
+        } else {
+            ControlSetup.setupTimePicker(getContext(), timeFromEditText, work.getTimeFrom());
+            ControlSetup.setupTimePicker(getContext(), timeToEditText, work.getTimeFrom() + workTime.getTime());
+            timeAmountRadioButton.setChecked(true);
+        }
+
+        final EditText timeAmountEditText = view.findViewById(R.id.editText_addWorkTime_amount);
+        ControlSetup.setupTimeAmountPicker(getContext(), timeAmountEditText, workTime.getTime());
+
         final EditText salaryEditText = view.findViewById(R.id.editText_addWorkTime_salary);
-        ControlSetup.setupSalaryEditText(salaryEditText, String.valueOf(Settings.DEFAULT_HOURLY_WAGE));
+        ControlSetup.setupSalaryEditText(salaryEditText, (double) workTime.getSalary() / 100);
+
+        final Spinner currencySpinner = view.findViewById(R.id.spinner_addWorkTime_currency);
+        currencySpinner.setSelection(workTime.getCurrency());
 
         final RadioButton salaryPerHourRadioButton = view.findViewById(R.id.radioButton_addWorkTime_salaryPerHour);
-        final Spinner currencySpinner = view.findViewById(R.id.spinner_addWorkTime_currency);
+        final RadioButton salaryForAllRadioButton = view.findViewById(R.id.radioButton_addWorkTime_salaryForAll);
+
+        if (workTime.getSalaryMode() == 0) {
+            salaryPerHourRadioButton.setChecked(true);
+        } else {
+            salaryForAllRadioButton.setChecked(true);
+        }
 
         final EditText infoEditText = view.findViewById(R.id.editText_addWorkTime_info);
+        infoEditText.setText(workTime.getInfo());
 
         final Button addButton = view.findViewById(R.id.button_addWorkTime_add);
+        addButton.setText(R.string.global_update);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    WorkTime workTime = new WorkTime();
                     workTime.setDay(dateEditText.getText().toString());
                     if (timeRangeRadioButton.isChecked()) {
                         int timeFromInMinutes = Utils.timeStringToMinutes(timeFromEditText.getText().toString());
@@ -123,7 +140,7 @@ public class AddWorkTimeFragment extends FormFragment {
                     workTime.setInfo(infoEditText.getText().toString());
                     workTime.setWorkId(work.getId());
 
-                    workTimeService.create(workTime);
+                    workTimeService.update(workTime);
                     if (getContext() != null) {
                         ((FragmentActivity) getContext()).onBackPressed();
                     }

@@ -22,8 +22,11 @@ import pl.pregiel.workwork.adapters.WorkListAdapter;
 import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.pojo.Work;
 import pl.pregiel.workwork.utils.ErrorToasts;
+import pl.pregiel.workwork.utils.FragmentOpener;
 
 public class WorkListFragment extends Fragment {
+    public static final String TAG = "WORK_LIST";
+
     private ListView workListView;
     private WorkService workService;
     private WorkListAdapter workListAdapter;
@@ -56,7 +59,8 @@ public class WorkListFragment extends Fragment {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addWork();
+                FragmentOpener.openFragment((FragmentActivity) getContext(),
+                        new AddWorkFragment(), AddWorkFragment.TAG, FragmentOpener.OpenMode.ADD );
             }
         });
 
@@ -73,22 +77,6 @@ public class WorkListFragment extends Fragment {
             workListView.setAdapter(workListAdapter);
         }
 
-        reloadWorkList();
-    }
-
-    public void addWork() {
-        if (getContext() != null) {
-            Fragment fragment = new AddWorkFragment();
-            FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.frame, fragment, AddWorkFragment.TAG);
-            fragmentTransaction.commit();
-        } else {
-            ErrorToasts.showUnknownErrorToast(getContext());
-        }
-    }
-
-    public void removeWork(Work work) {
-        workService.deleteById(work.getId());
         reloadWorkList();
     }
 

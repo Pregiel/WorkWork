@@ -16,7 +16,7 @@
     <string name="workDetails_totalSalary">Total salary</string>
     <string name="workDetails_averageHourlyWage">Average hourly wage</string>
     <string name="workDetails_daysWork">Days in work</string>
-    <string name="workDetails_hoursWorked">Hours worked</string>
+    <string name="workDetails_hoursWorked">Worked hours</string>
     <string name="format_hour" translatable="false">%1$s h</string>
     <string name="format_pln" translatable="false">%1$s %2$s</string>
     <string name="format_plnPerHour" translatable="false">%1$s %2$s/h</string>
@@ -60,7 +60,9 @@
     <string name="action_open">Open</string>
     <string name="action_delete">Delete</string>
     <string name="action_edit">Edit</string>
-    <string name="action_addWorkTime">Add</string>
+    <string name="action_addWorkTime">Add hours</string>
     <string name="title_updateWork">Update %1$s</string>
     <string name="global_update">Update</string>
+    <string name="alert_areYouSure">Are you sure?</string>
+    <string name="match_date" translatable="false">\\d{2}.\\d{2}.\\d{4}</string>
 </resources>

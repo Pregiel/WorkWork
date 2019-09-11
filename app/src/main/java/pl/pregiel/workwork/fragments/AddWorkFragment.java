@@ -3,7 +3,6 @@ package pl.pregiel.workwork.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +25,7 @@ import pl.pregiel.workwork.utils.ErrorToasts;
 import pl.pregiel.workwork.exceptions.ShowToastException;
 
 
-public class AddWorkFragment extends Fragment {
+public class AddWorkFragment extends FormFragment {
     public static final String TAG = "ADD_WORK";
 
     private WorkService workService;

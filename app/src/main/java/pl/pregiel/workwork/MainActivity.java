@@ -17,6 +17,7 @@ import pl.pregiel.workwork.fragments.AddWorkFragment;
 import pl.pregiel.workwork.fragments.AddWorkTimeFragment;
 import pl.pregiel.workwork.fragments.SummaryFragment;
 import pl.pregiel.workwork.fragments.UpdateWorkFragment;
+import pl.pregiel.workwork.fragments.UpdateWorkTimeFragment;
 import pl.pregiel.workwork.fragments.WorkDetailsFragment;
 import pl.pregiel.workwork.fragments.WorkListFragment;
 
@@ -53,17 +54,19 @@ public class MainActivity extends AppCompatActivity
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
 
             if (currentFragment instanceof WorkDetailsFragment
-                    || currentFragment instanceof AddWorkFragment
-                    || currentFragment instanceof UpdateWorkFragment) {
+                    || currentFragment instanceof AddWorkFragment) {
                 Fragment fragment = new WorkListFragment();
                 displaySelectedFragment(fragment);
                 return;
-            } else if (currentFragment instanceof AddWorkTimeFragment) {
+            } else if (currentFragment instanceof AddWorkTimeFragment
+                    || currentFragment instanceof UpdateWorkFragment
+                    || currentFragment instanceof UpdateWorkTimeFragment) {
                 Fragment fragment = getSupportFragmentManager().findFragmentByTag(WorkDetailsFragment.TAG);
                 if (fragment == null) {
                     fragment = new WorkListFragment();
                 } else {
                     ((WorkDetailsFragment) fragment).setTitle();
+                    ((WorkDetailsFragment) fragment).reload();
                 }
                 displaySelectedFragment(fragment);
                 return;
@@ -74,19 +77,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -97,7 +95,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;
         if (id == R.id.nav_worklist) {

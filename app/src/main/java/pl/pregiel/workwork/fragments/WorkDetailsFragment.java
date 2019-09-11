@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -29,27 +31,35 @@ import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.database.services.WorkTimeService;
 import pl.pregiel.workwork.data.pojo.Work;
 import pl.pregiel.workwork.data.pojo.WorkTime;
+import pl.pregiel.workwork.utils.CustomAlert;
+import pl.pregiel.workwork.utils.FragmentOpener;
 
 public class WorkDetailsFragment extends Fragment {
     public static final String TAG = "WORK_DETAILS";
 
+    private WorkService workService;
     private WorkTimeService workTimeService;
+
     private WorkTimeListAdapter workTimeListAdapter;
+
     private Work work;
+    private List<WorkTime> workTimeList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         Bundle arguments = getArguments();
 
-        WorkService workService = new WorkService(getContext());
+        workService = new WorkService(getContext());
         workTimeService = new WorkTimeService(getContext());
 
         if (arguments != null) {
             work = workService.getById(arguments.getInt("work_id", 0));
         }
         setTitle();
+
     }
 
     @Override
@@ -59,19 +69,88 @@ public class WorkDetailsFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.menu_workdetails, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_workDetails_add:
+                FragmentOpener.openFragment((FragmentActivity) getContext(),
+                        new AddWorkTimeFragment(), AddWorkTimeFragment.TAG, FragmentOpener.OpenMode.ADD, work);
+                break;
+
+            case R.id.action_workDetails_edit:
+                FragmentOpener.openFragment((FragmentActivity) getContext(),
+                        new UpdateWorkFragment(), UpdateWorkFragment.TAG, FragmentOpener.OpenMode.ADD, work);
+                break;
+
+            case R.id.action_workDetails_delete:
+                CustomAlert.buildAlert(getContext(), R.string.action_delete, R.string.alert_areYouSure,
+                        R.string.action_delete, new Runnable() {
+                            @Override
+                            public void run() {
+                                workService.deleteById(work.getId());
+                                FragmentOpener.openFragment((FragmentActivity) getContext(),
+                                        new WorkListFragment(), WorkListFragment.TAG, FragmentOpener.OpenMode.REPLACE);
+                            }
+                        },
+                        R.string.global_cancel, null).show();
+                break;
+        }
+        return true;
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         if (getActivity() == null || getContext() == null)
             return;
 
-        TextView totalTimeText = getActivity().findViewById(R.id.textView_workDetails_totalTime);
-        TextView averageTimeText = getActivity().findViewById(R.id.textView_workDetails_averageTime);
-        TextView daysWorkText = getActivity().findViewById(R.id.textView_workDetails_daysWork);
-        TextView totalSalaryText = getActivity().findViewById(R.id.textView_workDetails_totalSalary);
-        TextView averageHoursWageText = getActivity().findViewById(R.id.textView_workDetails_averageHourlyWage);
+        setWorkTimeList();
 
-        List<WorkTime> workTimeList = workTimeService.getByWorkId(work.getId());
+        updateDetails();
+
+        ListView hoursWorkedListView = getActivity().findViewById(R.id.listView_workDetails_hoursWorked);
+
+        if (workTimeListAdapter == null) {
+            workTimeListAdapter = new WorkTimeListAdapter(getContext(), workTimeList);
+            workTimeListAdapter.setRefreshWorkDetailsListRunnable(new Runnable() {
+                @Override
+                public void run() {
+                    reloadWorkTimeList();
+                }
+            });
+        }
+
+        hoursWorkedListView.setAdapter(workTimeListAdapter);
+
+        FloatingActionButton addWorkTimeFab = getActivity().findViewById(R.id.fab_workDetails_add);
+        addWorkTimeFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentOpener.openFragment((FragmentActivity) getContext(),
+                        new AddWorkTimeFragment(), AddWorkTimeFragment.TAG, FragmentOpener.OpenMode.ADD, work);
+            }
+        });
+    }
+
+    public void setTitle() {
+        if (getActivity() != null)
+            getActivity().setTitle(work.getTitle());
+    }
+
+    private void setWorkTimeList() {
+        if (workTimeList == null) {
+            workTimeList = workTimeService.getByWorkId(work.getId());
+        } else {
+            workTimeList.clear();
+            workTimeList.addAll(workTimeService.getByWorkId(work.getId()));
+        }
         Collections.sort(workTimeList, new Comparator<WorkTime>() {
             @Override
             public int compare(WorkTime o1, WorkTime o2) {
@@ -89,6 +168,16 @@ public class WorkDetailsFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void reloadWorkTimeList() {
+        setWorkTimeList();
+        workTimeListAdapter.notifyDataSetChanged();
+    }
+
+    private void updateDetails() {
+        if (getActivity() == null || getContext() == null)
+            return;
 
         HashMap<String, List<WorkTime>> workTimeByDate = new HashMap<>();
         double totalTime = 0, totalSalary = 0;
@@ -116,41 +205,28 @@ public class WorkDetailsFragment extends Fragment {
         double averageTime = totalTime / daysWork;
         double averageHoursWage = totalSalary / totalTime;
 
+        TextView totalTimeText = getActivity().findViewById(R.id.textView_workDetails_totalTime);
         totalTimeText.setText(getString(R.string.format_hour, String.format(Locale.getDefault(), "%.2f", totalTime)));
+
+        TextView averageTimeText = getActivity().findViewById(R.id.textView_workDetails_averageTime);
         averageTimeText.setText(getString(R.string.format_hourPerDay, String.format(Locale.getDefault(), "%.2f", averageTime)));
+
+        TextView daysWorkText = getActivity().findViewById(R.id.textView_workDetails_daysWork);
         daysWorkText.setText(getString((daysWork > 1 ? R.string.format_days : R.string.format_day), daysWork));
-        //TODO: zmienić walutę
+
+        TextView totalSalaryText = getActivity().findViewById(R.id.textView_workDetails_totalSalary);
         totalSalaryText.setText(getString(R.string.format_pln,
-                String.format(Locale.getDefault(), "%.2f", totalSalary), "PLN"));
+                String.format(Locale.getDefault(), "%.2f", totalSalary),
+                getResources().getStringArray(R.array.global_currencies)[work.getCurrency()]));
+
+        TextView averageHoursWageText = getActivity().findViewById(R.id.textView_workDetails_averageHourlyWage);
         averageHoursWageText.setText(getString(R.string.format_plnPerHour,
-                String.format(Locale.getDefault(), "%.2f", averageHoursWage), "PLN"));
-
-        ListView hoursWorkedListView = getActivity().findViewById(R.id.listView_workDetails_hoursWorked);
-
-        if (workTimeListAdapter == null) {
-            workTimeListAdapter = new WorkTimeListAdapter(getContext(), workTimeList);
-        }
-
-        hoursWorkedListView.setAdapter(workTimeListAdapter);
-
-        FloatingActionButton addWorkTimeFab = getActivity().findViewById(R.id.fab_workDetails_add);
-        addWorkTimeFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = new AddWorkTimeFragment();
-                Bundle arguments = new Bundle();
-                arguments.putInt("work_id", work.getId());
-                fragment.setArguments(arguments);
-
-                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.add(R.id.frame, fragment, AddWorkTimeFragment.TAG);
-                fragmentTransaction.commit();
-            }
-        });
+                String.format(Locale.getDefault(), "%.2f", averageHoursWage),
+                getResources().getStringArray(R.array.global_currencies)[work.getCurrency()]));
     }
 
-    public void setTitle() {
-        if (getActivity() != null)
-            getActivity().setTitle(work.getTitle());
+    public void reload() {
+        reloadWorkTimeList();
+        updateDetails();
     }
 }

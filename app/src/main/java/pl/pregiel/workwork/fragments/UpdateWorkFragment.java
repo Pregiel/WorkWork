@@ -3,7 +3,6 @@ package pl.pregiel.workwork.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +24,7 @@ import pl.pregiel.workwork.exceptions.TooShortFieldException;
 import pl.pregiel.workwork.utils.ErrorToasts;
 
 
-public class UpdateWorkFragment extends Fragment {
+public class UpdateWorkFragment extends FormFragment {
     public static final String TAG = "UPDATE_WORK";
 
     private WorkService workService;

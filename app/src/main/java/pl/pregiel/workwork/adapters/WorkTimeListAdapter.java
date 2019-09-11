@@ -4,7 +4,10 @@ package pl.pregiel.workwork.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -17,12 +20,26 @@ import java.util.Locale;
 
 import pl.pregiel.workwork.R;
 import pl.pregiel.workwork.Utils;
+import pl.pregiel.workwork.data.database.services.WorkService;
+import pl.pregiel.workwork.data.database.services.WorkTimeService;
 import pl.pregiel.workwork.data.pojo.WorkTime;
+import pl.pregiel.workwork.fragments.AddWorkTimeFragment;
+import pl.pregiel.workwork.fragments.UpdateWorkTimeFragment;
+import pl.pregiel.workwork.utils.CustomAlert;
+import pl.pregiel.workwork.utils.FragmentOpener;
 
 public class WorkTimeListAdapter extends ArrayAdapter<WorkTime> {
 
+    private WorkService workService;
+    private WorkTimeService workTimeService;
+
+    private Runnable refreshWorkDetailsListRunnable;
+
     public WorkTimeListAdapter(@NonNull Context context, @NonNull List<WorkTime> workTimeList) {
         super(context, 0, workTimeList);
+
+        workService = new WorkService(context);
+        workTimeService = new WorkTimeService(context);
     }
 
     @NonNull
@@ -56,8 +73,8 @@ public class WorkTimeListAdapter extends ArrayAdapter<WorkTime> {
             final TextView salaryForAll = convertView.findViewById(R.id.textView_workDetailsListElement_salaryForAll);
 
             if (workTime.getSalaryMode() == 0) {
-                double salary = workTime.getSalary() / 100;
-                double totalTime = workTime.getTime() / 60;
+                double salary = (double) workTime.getSalary() / 100;
+                double totalTime = (double) workTime.getTime() / 60;
                 salaryPerHour.setText(getContext().getString(R.string.format_salaryPerHour,
                         String.format(Locale.getDefault(), "%.2f", salary),
                         getContext().getResources().getStringArray(R.array.global_currencies)[workTime.getCurrency()]));
@@ -67,8 +84,8 @@ public class WorkTimeListAdapter extends ArrayAdapter<WorkTime> {
                         getContext().getResources().getStringArray(R.array.global_currencies)[workTime.getCurrency()],
                         Utils.formatDoubleToString(totalTime)));
             } else {
-                double salary = workTime.getSalary() / 100;
-                double totalTime = workTime.getTime() / 60;
+                double salary = (double) workTime.getSalary() / 100;
+                double totalTime = (double) workTime.getTime() / 60;
                 salaryPerHour.setText(getContext().getString(R.string.format_salaryPerHour,
                         String.format(Locale.getDefault(), "%.2f", salary / totalTime),
                         getContext().getResources().getStringArray(R.array.global_currencies)[workTime.getCurrency()]));
@@ -104,8 +121,52 @@ public class WorkTimeListAdapter extends ArrayAdapter<WorkTime> {
                     }
                 }
             });
+            final View finalConvertView = convertView;
+            mainLayout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    setupPopupMenu(finalConvertView, workTime);
+                    return true;
+                }
+            });
 
         }
         return convertView;
+    }
+
+    private void setupPopupMenu(View view, final WorkTime workTime) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), view);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_workdetailslistelement, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_workDetailsListElement_edit:
+                        FragmentOpener.openFragment((FragmentActivity) getContext(),
+                                new UpdateWorkTimeFragment(), UpdateWorkTimeFragment.TAG, FragmentOpener.OpenMode.ADD, workTime);
+                        return true;
+                    case R.id.action_workDetailsListElement_delete:
+                        CustomAlert.buildAlert(getContext(), R.string.action_delete, R.string.alert_areYouSure,
+                                R.string.action_delete, new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        workTimeService.deleteById(workTime.getId());
+                                        if (refreshWorkDetailsListRunnable != null)
+                                            refreshWorkDetailsListRunnable.run();
+                                    }
+                                },
+                                R.string.global_cancel, null).show();
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+    public void setRefreshWorkDetailsListRunnable(Runnable refreshWorkDetailsListRunnable) {
+        this.refreshWorkDetailsListRunnable = refreshWorkDetailsListRunnable;
     }
 }
