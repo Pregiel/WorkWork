@@ -22,6 +22,7 @@ import pl.pregiel.workwork.R;
 import pl.pregiel.workwork.Utils;
 import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.database.services.WorkTimeService;
+import pl.pregiel.workwork.data.pojo.Work;
 import pl.pregiel.workwork.data.pojo.WorkTime;
 import pl.pregiel.workwork.fragments.AddWorkTimeFragment;
 import pl.pregiel.workwork.fragments.UpdateWorkTimeFragment;
@@ -32,6 +33,8 @@ public class WorkTimeListAdapter extends ArrayAdapter<WorkTime> {
 
     private WorkService workService;
     private WorkTimeService workTimeService;
+
+    private Work work;
 
     private Runnable refreshWorkDetailsListRunnable;
 
@@ -52,6 +55,9 @@ public class WorkTimeListAdapter extends ArrayAdapter<WorkTime> {
         }
 
         if (workTime != null) {
+            if (work == null) {
+                work = workService.getById(workTime.getWorkId());
+            }
 
             final TextView dayText = convertView.findViewById(R.id.textView_workDetailsListElement_day);
             dayText.setText(workTime.getDay());
@@ -77,22 +83,22 @@ public class WorkTimeListAdapter extends ArrayAdapter<WorkTime> {
                 double totalTime = (double) workTime.getTime() / 60;
                 salaryPerHour.setText(getContext().getString(R.string.format_salaryPerHour,
                         String.format(Locale.getDefault(), "%.2f", salary),
-                        getContext().getResources().getStringArray(R.array.global_currencies)[workTime.getCurrency()]));
+                        getContext().getResources().getStringArray(R.array.global_currencies)[work.getCurrency()]));
 
                 salaryForAll.setText(getContext().getString(R.string.format_salaryForAll,
                         String.format(Locale.getDefault(), "%.2f", salary * totalTime),
-                        getContext().getResources().getStringArray(R.array.global_currencies)[workTime.getCurrency()],
+                        getContext().getResources().getStringArray(R.array.global_currencies)[work.getCurrency()],
                         Utils.formatDoubleToString(totalTime)));
             } else {
                 double salary = (double) workTime.getSalary() / 100;
                 double totalTime = (double) workTime.getTime() / 60;
                 salaryPerHour.setText(getContext().getString(R.string.format_salaryPerHour,
                         String.format(Locale.getDefault(), "%.2f", salary / totalTime),
-                        getContext().getResources().getStringArray(R.array.global_currencies)[workTime.getCurrency()]));
+                        getContext().getResources().getStringArray(R.array.global_currencies)[work.getCurrency()]));
 
                 salaryForAll.setText(getContext().getString(R.string.format_salaryForAll,
                         String.format(Locale.getDefault(), "%.2f", salary),
-                        getContext().getResources().getStringArray(R.array.global_currencies)[workTime.getCurrency()],
+                        getContext().getResources().getStringArray(R.array.global_currencies)[work.getCurrency()],
                         Utils.formatDoubleToString(totalTime)));
             }
 

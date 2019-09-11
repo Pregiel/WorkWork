@@ -91,7 +91,7 @@ public class UpdateWorkFragment extends FormFragment {
         }
 
         final Spinner currencySpinner = view.findViewById(R.id.spinner_addWork_currency);
-        currencySpinner.setSelection(work.getCurrency());
+        ControlSetup.setupCurrencySpinner(getContext(), currencySpinner, work.getCurrency());
 
         final EditText infoEditText = view.findViewById(R.id.editText_addWork_info);
         infoEditText.setText(work.getInfo());

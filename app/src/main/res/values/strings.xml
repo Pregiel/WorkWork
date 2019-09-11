@@ -65,4 +65,7 @@
     <string name="global_update">Update</string>
     <string name="alert_areYouSure">Are you sure?</string>
     <string name="match_date" translatable="false">\\d{2}.\\d{2}.\\d{4}</string>
+    <string name="global_changeCurrency">Change currency</string>
+    <string name="alert_changeCurrency">This will applied to every worked hours in this work. Do you want to continue?</string>
+    <string name="global_yes">Yes</string>
 </resources>

@@ -226,6 +226,8 @@ public class WorkDetailsFragment extends Fragment {
     }
 
     public void reload() {
+        int workId = work.getId();
+        work = workService.getById(workId);
         reloadWorkTimeList();
         updateDetails();
     }

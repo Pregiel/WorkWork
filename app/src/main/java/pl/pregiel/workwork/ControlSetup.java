@@ -10,16 +10,19 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
 import pl.pregiel.workwork.fragments.dialogFragments.HourAndMinutePickerDialogFragment;
 import pl.pregiel.workwork.listeners.TextListener;
+import pl.pregiel.workwork.utils.CustomAlert;
 
 public class ControlSetup {
 
@@ -252,5 +255,43 @@ public class ControlSetup {
             }
         });
         editText.setText(defaultValue);
+    }
+
+    public static void setupCurrencySpinner(final Context context, @NonNull final Spinner spinner, int selectedItem) {
+        spinner.setSelection(selectedItem);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            int lastSelected = spinner.getSelectedItemPosition();
+            boolean ignore = true;
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (!ignore) {
+                    CustomAlert.buildAlert(context, R.string.global_changeCurrency, R.string.alert_changeCurrency,
+                            R.string.global_yes, new Runnable() {
+                                @Override
+                                public void run() {
+                                    lastSelected = spinner.getSelectedItemPosition();
+                                }
+                            },
+                            R.string.global_cancel, new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (!ignore) {
+                                        ignore = true;
+                                        spinner.setSelection(lastSelected);
+                                    }
+                                }
+                            }
+                    ).show();
+                } else {
+                    ignore = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 }

@@ -9,7 +9,6 @@ public class WorkTime {
     private Integer timeTo;
     private Integer salary;
     private Integer salaryMode;
-    private Integer currency;
     private String info;
     private Integer workId;
 
@@ -75,14 +74,6 @@ public class WorkTime {
 
     public void setInfo(String info) {
         this.info = info;
-    }
-
-    public Integer getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Integer currency) {
-        this.currency = currency;
     }
 
     public Integer getWorkId() {

@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -14,16 +15,14 @@ import android.widget.Spinner;
 
 import pl.pregiel.workwork.ControlSetup;
 import pl.pregiel.workwork.R;
-import pl.pregiel.workwork.Settings;
 import pl.pregiel.workwork.Utils;
-import pl.pregiel.workwork.ValidationConst;
 import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.database.services.WorkTimeService;
 import pl.pregiel.workwork.data.pojo.Work;
 import pl.pregiel.workwork.data.pojo.WorkTime;
 import pl.pregiel.workwork.exceptions.EmptyFieldException;
 import pl.pregiel.workwork.exceptions.ShowToastException;
-import pl.pregiel.workwork.exceptions.TooShortFieldException;
+import pl.pregiel.workwork.utils.CustomAlert;
 import pl.pregiel.workwork.utils.ErrorToasts;
 
 
@@ -86,7 +85,7 @@ public class UpdateWorkTimeFragment extends FormFragment {
         ControlSetup.setupSalaryEditText(salaryEditText, (double) workTime.getSalary() / 100);
 
         final Spinner currencySpinner = view.findViewById(R.id.spinner_addWorkTime_currency);
-        currencySpinner.setSelection(workTime.getCurrency());
+        ControlSetup.setupCurrencySpinner(getContext(), currencySpinner, work.getCurrency());
 
         final RadioButton salaryPerHourRadioButton = view.findViewById(R.id.radioButton_addWorkTime_salaryPerHour);
         final RadioButton salaryForAllRadioButton = view.findViewById(R.id.radioButton_addWorkTime_salaryForAll);
@@ -136,11 +135,16 @@ public class UpdateWorkTimeFragment extends FormFragment {
                     int salary = Math.round(Float.valueOf(salaryString) * 100);
                     workTime.setSalary(salary);
                     workTime.setSalaryMode(salaryPerHourRadioButton.isChecked() ? 0 : 1);
-                    workTime.setCurrency(currencySpinner.getSelectedItemPosition());
                     workTime.setInfo(infoEditText.getText().toString());
                     workTime.setWorkId(work.getId());
 
                     workTimeService.update(workTime);
+
+                    if (work.getCurrency() != currencySpinner.getSelectedItemPosition()) {
+                        work.setCurrency(currencySpinner.getSelectedItemPosition());
+                        workService.update(work);
+                    }
+
                     if (getContext() != null) {
                         ((FragmentActivity) getContext()).onBackPressed();
                     }

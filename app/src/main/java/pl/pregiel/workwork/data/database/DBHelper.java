@@ -45,7 +45,6 @@ public class DBHelper extends SQLiteOpenHelper {
                         + WorkTimes.Columns.WORKTIME_TIME_TO + " INTEGER, "
                         + WorkTimes.Columns.WORKTIME_SALARY + " INTEGER, "
                         + WorkTimes.Columns.WORKTIME_SALARY_MODE + " INTEGER, "
-                        + WorkTimes.Columns.WORKTIME_CURRENCY + " INTEGER, "
                         + WorkTimes.Columns.WORKTIME_INFO + " TEXT, "
                         + WorkTimes.Columns.WORKTIME_WORK_ID + " INTEGER )"
 

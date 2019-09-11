@@ -32,9 +32,14 @@ public class CustomAlert {
         builder.setNegativeButton(negativeTitleId, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
                 if (negativeRunnable != null)
                     negativeRunnable.run();
-                dialog.dismiss();
             }
         });
         return builder;

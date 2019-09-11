@@ -29,13 +29,15 @@ public class AddWorkTimeFragment extends FormFragment {
     public static final String TAG = "ADD_WORKTIME";
 
     private WorkTimeService workTimeService;
+    private WorkService workService;
+
     private Work work;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle arguments = getArguments();
-        WorkService workService = new WorkService(getContext());
+        workService = new WorkService(getContext());
         workTimeService = new WorkTimeService(getContext());
 
         if (arguments != null && getActivity() != null) {
@@ -80,6 +82,7 @@ public class AddWorkTimeFragment extends FormFragment {
 
         final RadioButton salaryPerHourRadioButton = view.findViewById(R.id.radioButton_addWorkTime_salaryPerHour);
         final Spinner currencySpinner = view.findViewById(R.id.spinner_addWorkTime_currency);
+        ControlSetup.setupCurrencySpinner(getContext(), currencySpinner, work.getCurrency());
 
         final EditText infoEditText = view.findViewById(R.id.editText_addWorkTime_info);
 
@@ -119,11 +122,15 @@ public class AddWorkTimeFragment extends FormFragment {
                     int salary = Math.round(Float.valueOf(salaryString) * 100);
                     workTime.setSalary(salary);
                     workTime.setSalaryMode(salaryPerHourRadioButton.isChecked() ? 0 : 1);
-                    workTime.setCurrency(currencySpinner.getSelectedItemPosition());
                     workTime.setInfo(infoEditText.getText().toString());
                     workTime.setWorkId(work.getId());
 
                     workTimeService.create(workTime);
+
+                    if (work.getCurrency() != currencySpinner.getSelectedItemPosition()) {
+                        work.setCurrency(currencySpinner.getSelectedItemPosition());
+                        workService.update(work);
+                    }
                     if (getContext() != null) {
                         ((FragmentActivity) getContext()).onBackPressed();
                     }
