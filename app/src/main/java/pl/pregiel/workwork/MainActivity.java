@@ -13,6 +13,8 @@ import android.view.MenuItem;
 
 import pl.pregiel.workwork.fragments.AddWorkFragment;
 import pl.pregiel.workwork.fragments.AddWorkTimeFragment;
+import pl.pregiel.workwork.fragments.CalculatorInputFragment;
+import pl.pregiel.workwork.fragments.CalculatorResultFragment;
 import pl.pregiel.workwork.fragments.TaggedFragment;
 import pl.pregiel.workwork.fragments.SummaryFragment;
 import pl.pregiel.workwork.fragments.UpdateWorkFragment;
@@ -23,8 +25,6 @@ import pl.pregiel.workwork.utils.FragmentOpener;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private static final String TAG = "MAIN_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity
                     || currentFragment instanceof AddWorkFragment) {
                 TaggedFragment fragment = new WorkListFragment();
                 FragmentOpener.openFragment(getSupportFragmentManager(), fragment, FragmentOpener.OpenMode.REPLACE);
-                return;
             } else if (currentFragment instanceof AddWorkTimeFragment
                     || currentFragment instanceof UpdateWorkFragment
                     || currentFragment instanceof UpdateWorkTimeFragment) {
@@ -73,9 +72,15 @@ public class MainActivity extends AppCompatActivity
                     ((WorkDetailsFragment) fragment).reload();
                 }
                 FragmentOpener.openFragment(getSupportFragmentManager(), fragment, FragmentOpener.OpenMode.REPLACE);
-                return;
+            } else if (currentFragment instanceof CalculatorResultFragment) {
+                TaggedFragment fragment = (TaggedFragment) getSupportFragmentManager().findFragmentByTag(CalculatorInputFragment.FRAGMENT_TAG);
+                if (fragment == null) {
+                    fragment = new CalculatorInputFragment();
+                }
+                FragmentOpener.openFragment(getSupportFragmentManager(), fragment, FragmentOpener.OpenMode.REPLACE);
+            } else {
+                super.onBackPressed();
             }
-            super.onBackPressed();
         }
     }
 
@@ -96,7 +101,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -106,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_summary) {
             fragment = new SummaryFragment();
         } else if (id == R.id.nav_calculator) {
-
+            fragment = new CalculatorInputFragment();
         }
 
         FragmentOpener.openFragment(getSupportFragmentManager(), fragment, FragmentOpener.OpenMode.REPLACE);

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Tax>
+    <PensionInsuranceTax>
+        <ForEmployee>0.0976</ForEmployee>
+        <ForEmployer>0.0976</ForEmployer>
+    </PensionInsuranceTax>
+
+    <DisabilityInsuranceTax>
+        <ForEmployee>0.015</ForEmployee>
+        <ForEmployer>0.065</ForEmployer>
+    </DisabilityInsuranceTax>
+
+    <SicknessInsuranceTax>0.0245</SicknessInsuranceTax>
+
+    <SocialInsuranceLimit>142950.0</SocialInsuranceLimit>
+
+    <AccidentInsuranceTax>0.0167</AccidentInsuranceTax>
+
+    <GettingIncomeCost>
+        <Resident>111.25</Resident>
+        <Non-resident>139.06</Non-resident>
+    </GettingIncomeCost>
+
+    <TaxFree>46.33</TaxFree>
+
+    <HealthInsuranceTax>0.09</HealthInsuranceTax>
+    <HealthInsuranceEffectiveTax>0.0775</HealthInsuranceEffectiveTax>
+
+    <FirstTaxLevel>0.18</FirstTaxLevel>
+    <SecondLevel>85528.5</SecondLevel>
+    <SecondTaxLevel>0.32</SecondTaxLevel>
+</Tax>

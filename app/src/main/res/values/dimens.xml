@@ -8,4 +8,6 @@
     <dimen name="workDetails_labelSize">16sp</dimen>
     <dimen name="workDetails_labelDescSize">16sp</dimen>
     <dimen name="form_concatLabel">16sp</dimen>
+    <dimen name="pie_segment_label_font_size">10sp</dimen>
+    <dimen name="calcResult_square_size">14dp</dimen>
 </resources>

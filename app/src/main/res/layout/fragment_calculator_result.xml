@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:padding="6dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout_calcResult_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="@string/global_brutto"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView_calcResult_brutto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/global_moneyWithCurrency"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                tools:layout_editor_absoluteX="133dp"
+                tools:layout_editor_absoluteY="126dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="@string/global_netto"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/view_calcResult_nettoSquare"
+                    android:layout_width="@dimen/calcResult_square_size"
+                    android:layout_height="@dimen/calcResult_square_size"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="38dp"
+                    android:background="@color/secondaryColor" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/textView_calcResult_netto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/global_moneyWithCurrency"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/linearLayout_calcResult_top"
+        android:fillViewport="true">
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout_calcResult_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/view_calcResult_pensionSquare"
+                        android:layout_width="@dimen/calcResult_square_size"
+                        android:layout_height="@dimen/calcResult_square_size"
+                        android:layout_column="0"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@color/secondaryColor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/calcResult_pensionInsurance" />
+
+                    <TextView
+                        android:id="@+id/textView_calcResult_pensionInsurance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_weight="0"
+                        android:gravity="end"
+                        android:text="@string/global_moneyWithCurrency"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/view_calcResult_disabilitySquare"
+                        android:layout_width="@dimen/calcResult_square_size"
+                        android:layout_height="@dimen/calcResult_square_size"
+                        android:layout_column="0"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@color/secondaryColor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/calcResult_disabilityInsurance" />
+
+                    <TextView
+                        android:id="@+id/textView_calcResult_disabilityInsurance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_weight="0"
+                        android:gravity="end"
+                        android:text="@string/global_moneyWithCurrency"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/view_calcResult_sicknessSquare"
+                        android:layout_width="@dimen/calcResult_square_size"
+                        android:layout_height="@dimen/calcResult_square_size"
+                        android:layout_column="0"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@color/secondaryColor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/calcResult_sicknessInsurance" />
+
+                    <TextView
+                        android:id="@+id/textView_calcResult_sicknessInsurance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_weight="0"
+                        android:gravity="end"
+                        android:text="@string/global_moneyWithCurrency"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/view_calcResult_healthSquare"
+                        android:layout_width="@dimen/calcResult_square_size"
+                        android:layout_height="@dimen/calcResult_square_size"
+                        android:layout_column="0"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@color/secondaryColor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/calcResult_healthInsurance" />
+
+                    <TextView
+                        android:id="@+id/textView_calcResult_healthInsurance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_weight="0"
+                        android:gravity="end"
+                        android:text="@string/global_moneyWithCurrency"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/view_calcResult_gettingIncomeSquare"
+                        android:layout_width="@dimen/calcResult_square_size"
+                        android:layout_height="@dimen/calcResult_square_size"
+                        android:layout_column="0"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@color/secondaryColor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/calcResult_gettingIncomeAdvance" />
+
+                    <TextView
+                        android:id="@+id/textView_calcResult_pitAdvance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_weight="0"
+                        android:gravity="end"
+                        android:text="@string/global_moneyWithCurrency"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/global_details"
+                android:textColor="@color/secondaryColor"
+                android:textSize="12sp" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart_calcResult_pieChart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="300dp"
+                android:minWidth="200dp">
+
+            </com.github.mikephil.charting.charts.PieChart>
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

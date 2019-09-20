@@ -45,4 +45,30 @@
     <string name="global_update">Aktualizuj</string>
     <string name="title_updateWork">Edytuj %1$s</string>
     <string name="alert_areYouSure">Czy na pewno chcesz kontynuować?</string>
+    <string name="global_yes">Tak</string>
+    <string name="global_changeCurrency">Zmień walutę</string>
+    <string name="alert_changeCurrency">Operacja zostanie zastosowana do wszystkich elementów w wybranej pracy. Czy chcesz kontynuować?</string>
+    <string name="input_taxYear">Rok podatkowy</string>
+    <string name="input_calculate">Oblicz</string>
+    <string name="input_26old">Ukończony 26 rok życia</string>
+    <string name="input_workLocation">Praca w miejscu zamieszkania</string>
+    <string name="input_enterSalary">Podaj wynagrodzenie</string>
+    <string name="input_salaryZero">Wynagrodzenie musi być większe od 0 zł</string>
+    <string name="global_netto">Netto</string>
+    <string name="global_brutto">Brutto</string>
+    <string name="global_details">Szczegóły</string>
+    <string name="calcResult_bruttoSalary">Kwota brutto</string>
+    <string name="calcResult_pensionInsurance">Ubezpieczenie emerytalne</string>
+    <string name="calcResult_sicknessInsurance">Ubezpieczenie chorobowe</string>
+    <string name="calcResult_healthInsurance">Ubezpieczenie zdrowotne</string>
+    <string name="calcResult_disabilityInsurance">Ubezpieczenie rentowe</string>
+    <string name="calcResult_gettingIncomeAdvance">Zaliczka na PIT</string>
+    <string name="calcResult_nettoSalary">Kwota netto</string>
+    <string-array name="input_salaryType">
+        <item>Brutto</item>
+        <item>Netto</item>
+    </string-array>
+    <string-array name="input_taxYear">
+        <item>2019</item>
+    </string-array>
 </resources>

@@ -46,6 +46,10 @@ public class FragmentOpener {
         openFragment(fragmentManager, fragment, openMode, arguments);
     }
 
+    public static void openFragment(FragmentActivity fragmentActivity, TaggedFragment fragment, OpenMode openMode, Bundle arguments) {
+        openFragment(fragmentActivity.getSupportFragmentManager(), fragment, openMode, arguments);
+    }
+
     public static void openFragment(FragmentManager fragmentManager, TaggedFragment fragment, OpenMode openMode, Bundle arguments) {
         if (arguments != null)
             ((android.support.v4.app.Fragment) fragment).setArguments(arguments);

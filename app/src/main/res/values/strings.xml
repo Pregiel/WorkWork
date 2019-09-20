@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">WorkWork</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_worklist">Work List</string>
     <string name="title_summary">Summary</string>
     <string name="title_calculator">Calculator</string>
@@ -68,4 +68,28 @@
     <string name="global_changeCurrency">Change currency</string>
     <string name="alert_changeCurrency">This will applied to every worked hours in this work. Do you want to continue?</string>
     <string name="global_yes">Yes</string>
+    <string name="input_taxYear">Tax year</string>
+    <string name="input_calculate">Submit</string>
+    <string name="input_26old">26 years old</string>
+    <string name="input_workLocation">Work in home location</string>
+    <string name="input_enterSalary">Enter salary</string>
+    <string name="input_salaryZero">Salary must be greater than 0 PLN</string>
+    <string name="global_netto">Net</string>
+    <string name="global_brutto">Gross</string>
+    <string name="global_moneyWithCurrency" translatable="false">%1$.2f PLN</string>
+    <string name="global_details">Details</string>
+    <string name="calcResult_bruttoSalary">Gross income</string>
+    <string name="calcResult_pensionInsurance">Pension insurance</string>
+    <string name="calcResult_sicknessInsurance">Sickness insurance</string>
+    <string name="calcResult_healthInsurance">Health insurance</string>
+    <string name="calcResult_disabilityInsurance">Disability insurance</string>
+    <string name="calcResult_gettingIncomeAdvance">Getting income advance</string>
+    <string name="calcResult_nettoSalary">Net income</string>
+    <string-array name="input_salaryType">
+        <item>Gross</item>
+        <item>Net</item>
+    </string-array>
+    <string-array name="input_taxYear">
+        <item>2019</item>
+    </string-array>
 </resources>
