@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Locale;
 
 import pl.pregiel.workwork.R;
-import pl.pregiel.workwork.Utils;
 import pl.pregiel.workwork.adapters.WorkTimeListAdapter;
 import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.database.services.WorkTimeService;
@@ -33,6 +32,7 @@ import pl.pregiel.workwork.data.pojo.Work;
 import pl.pregiel.workwork.data.pojo.WorkTime;
 import pl.pregiel.workwork.utils.CustomAlert;
 import pl.pregiel.workwork.utils.FragmentOpener;
+import pl.pregiel.workwork.utils.Utils;
 
 public class WorkDetailsFragment extends Fragment implements TaggedFragment {
     public static final String FRAGMENT_TAG = "WORK_DETAILS";

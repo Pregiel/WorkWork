@@ -21,7 +21,6 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 import pl.pregiel.workwork.R;
-import pl.pregiel.workwork.Utils;
 import pl.pregiel.workwork.fragments.dialogFragments.HourAndMinutePickerDialogFragment;
 import pl.pregiel.workwork.listeners.TextListener;
 
@@ -81,7 +80,7 @@ public class ControlSetup {
     }
 
     public static void setupTimePicker(final Context context, @NonNull final EditText editText, int defaultMinute) {
-        String defaultTime = Utils.timeMinutesToString(context, defaultMinute);
+        String defaultTime = Utils.timeMinutesToString(defaultMinute);
         setupTimePicker(context, editText, defaultTime);
     }
 
@@ -146,7 +145,7 @@ public class ControlSetup {
     }
 
     public static void setupTimeAmountPicker(final Context context, @NonNull final EditText editText, final int defaultMinute) {
-        String defaultTime = Utils.timeMinutesToStringWithSuffixes(context, defaultMinute);
+        String defaultTime = Utils.timeMinutesToStringWithSuffixes(defaultMinute);
         setupTimeAmountPicker(context, editText, defaultTime);
     }
 
@@ -203,14 +202,14 @@ public class ControlSetup {
                     for (RadioButton radioButton : radioButtons) {
                         if (buttonView.getId() == radioButton.getId()) {
                             if (setDisabled) {
-                                Utils.setEnabledControl(true,
+                                AndroidUtils.setEnabledControl(true,
                                         (ViewGroup) radioButton.getParent(),
                                         radioButton.getId());
                             }
                         } else {
                             radioButton.setChecked(false);
                             if (setDisabled) {
-                                Utils.setEnabledControl(false,
+                                AndroidUtils.setEnabledControl(false,
                                         (ViewGroup) radioButton.getParent(),
                                         radioButton.getId());
                             }
@@ -226,7 +225,7 @@ public class ControlSetup {
             if (radioButton != radioButtons[0]) {
 
                 if (setDisabled) {
-                    Utils.setEnabledControl(false, (ViewGroup) radioButton.getParent(), radioButton.getId());
+                    AndroidUtils.setEnabledControl(false, (ViewGroup) radioButton.getParent(), radioButton.getId());
                 }
             }
         }

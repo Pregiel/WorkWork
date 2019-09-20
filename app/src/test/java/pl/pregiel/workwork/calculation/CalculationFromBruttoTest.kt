@@ -1,10 +1,7 @@
 package pl.pregiel.workwork.calculation
 
+import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Tag
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
 import pl.pregiel.workwork.data.pojo.DisabilityInsuranceTax
 import pl.pregiel.workwork.data.pojo.GettingIncomeCost
 import pl.pregiel.workwork.data.pojo.PensionInsuranceTax
@@ -52,14 +49,15 @@ internal class CalculationFromBruttoTest {
                 old26 = true
         )
         calculationFromBrutto.calculate()
-
-        assertEquals(2250.0, calculationFromBrutto.brutto, delta)
-        assertEquals(219.60, calculationFromBrutto.pensionInsurance, delta)
-        assertEquals(33.75, calculationFromBrutto.disabilityInsurance, delta)
-        assertEquals(55.13, calculationFromBrutto.sicknessInsurance, delta)
-        assertEquals(174.74, calculationFromBrutto.healthInsurance, delta)
-        assertEquals(133.0, calculationFromBrutto.gettingIncomeAdvance, delta)
-        assertEquals(1633.78, calculationFromBrutto.netto, delta)
+        assertAll(
+                { assertEquals(2250.0, calculationFromBrutto.brutto, delta) },
+                { assertEquals(219.60, calculationFromBrutto.pensionInsurance, delta) },
+                { assertEquals(33.75, calculationFromBrutto.disabilityInsurance, delta) },
+                { assertEquals(55.13, calculationFromBrutto.sicknessInsurance, delta) },
+                { assertEquals(174.74, calculationFromBrutto.healthInsurance, delta) },
+                { assertEquals(133.0, calculationFromBrutto.gettingIncomeAdvance, delta) },
+                { assertEquals(1633.78, calculationFromBrutto.netto, delta) }
+        )
     }
 
     @Test
@@ -72,13 +70,15 @@ internal class CalculationFromBruttoTest {
         )
         calculationFromBrutto.calculate()
 
-        assertEquals(2250.0, calculationFromBrutto.brutto, delta)
-        assertEquals(219.60, calculationFromBrutto.pensionInsurance, delta)
-        assertEquals(33.75, calculationFromBrutto.disabilityInsurance, delta)
-        assertEquals(55.13, calculationFromBrutto.sicknessInsurance, delta)
-        assertEquals(174.74, calculationFromBrutto.healthInsurance, delta)
-        assertEquals(128.0, calculationFromBrutto.gettingIncomeAdvance, delta)
-        assertEquals(1638.78, calculationFromBrutto.netto, delta)
+        assertAll(
+                { assertEquals(2250.0, calculationFromBrutto.brutto, delta) },
+                { assertEquals(219.60, calculationFromBrutto.pensionInsurance, delta) },
+                { assertEquals(33.75, calculationFromBrutto.disabilityInsurance, delta) },
+                { assertEquals(55.13, calculationFromBrutto.sicknessInsurance, delta) },
+                { assertEquals(174.74, calculationFromBrutto.healthInsurance, delta) },
+                { assertEquals(128.0, calculationFromBrutto.gettingIncomeAdvance, delta) },
+                { assertEquals(1638.78, calculationFromBrutto.netto, delta) }
+        )
     }
 
     @Test
@@ -91,13 +91,15 @@ internal class CalculationFromBruttoTest {
         )
         calculationFromBrutto.calculate()
 
-        assertEquals(2250.0, calculationFromBrutto.brutto, delta)
-        assertEquals(219.60, calculationFromBrutto.pensionInsurance, delta)
-        assertEquals(33.75, calculationFromBrutto.disabilityInsurance, delta)
-        assertEquals(55.13, calculationFromBrutto.sicknessInsurance, delta)
-        assertEquals(174.74, calculationFromBrutto.healthInsurance, delta)
-        assertEquals(0.0, calculationFromBrutto.gettingIncomeAdvance, delta)
-        assertEquals(1766.78, calculationFromBrutto.netto, delta)
+        assertAll(
+                { assertEquals(2250.0, calculationFromBrutto.brutto, delta) },
+                { assertEquals(219.60, calculationFromBrutto.pensionInsurance, delta) },
+                { assertEquals(33.75, calculationFromBrutto.disabilityInsurance, delta) },
+                { assertEquals(55.13, calculationFromBrutto.sicknessInsurance, delta) },
+                { assertEquals(174.74, calculationFromBrutto.healthInsurance, delta) },
+                { assertEquals(0.0, calculationFromBrutto.gettingIncomeAdvance, delta) },
+                { assertEquals(1766.78, calculationFromBrutto.netto, delta) }
+        )
     }
 
     @Test
@@ -110,13 +112,15 @@ internal class CalculationFromBruttoTest {
         )
         calculationFromBrutto.calculate()
 
-        assertEquals(2250.0, calculationFromBrutto.brutto, delta)
-        assertEquals(219.60, calculationFromBrutto.pensionInsurance, delta)
-        assertEquals(33.75, calculationFromBrutto.disabilityInsurance, delta)
-        assertEquals(55.13, calculationFromBrutto.sicknessInsurance, delta)
-        assertEquals(174.74, calculationFromBrutto.healthInsurance, delta)
-        assertEquals(0.0, calculationFromBrutto.gettingIncomeAdvance, delta)
-        assertEquals(1766.78, calculationFromBrutto.netto, delta)
+        assertAll(
+                { assertEquals(2250.0, calculationFromBrutto.brutto, delta) },
+                { assertEquals(219.60, calculationFromBrutto.pensionInsurance, delta) },
+                { assertEquals(33.75, calculationFromBrutto.disabilityInsurance, delta) },
+                { assertEquals(55.13, calculationFromBrutto.sicknessInsurance, delta) },
+                { assertEquals(174.74, calculationFromBrutto.healthInsurance, delta) },
+                { assertEquals(0.0, calculationFromBrutto.gettingIncomeAdvance, delta) },
+                { assertEquals(1766.78, calculationFromBrutto.netto, delta) }
+        )
     }
 
     @Test
@@ -129,13 +133,15 @@ internal class CalculationFromBruttoTest {
         )
         calculationFromBrutto.calculate()
 
-        assertEquals(500.0, calculationFromBrutto.brutto, delta)
-        assertEquals(48.8, calculationFromBrutto.pensionInsurance, delta)
-        assertEquals(7.5, calculationFromBrutto.disabilityInsurance, delta)
-        assertEquals(12.25, calculationFromBrutto.sicknessInsurance, delta)
-        assertEquals(11.27, calculationFromBrutto.healthInsurance, delta)
-        assertEquals(0.0, calculationFromBrutto.gettingIncomeAdvance, delta)
-        assertEquals(420.18, calculationFromBrutto.netto, delta)
+        assertAll(
+                { assertEquals(500.0, calculationFromBrutto.brutto, delta) },
+                { assertEquals(48.8, calculationFromBrutto.pensionInsurance, delta) },
+                { assertEquals(7.5, calculationFromBrutto.disabilityInsurance, delta) },
+                { assertEquals(12.25, calculationFromBrutto.sicknessInsurance, delta) },
+                { assertEquals(11.27, calculationFromBrutto.healthInsurance, delta) },
+                { assertEquals(0.0, calculationFromBrutto.gettingIncomeAdvance, delta) },
+                { assertEquals(420.18, calculationFromBrutto.netto, delta) }
+        )
     }
 
     @Test
@@ -148,13 +154,15 @@ internal class CalculationFromBruttoTest {
         )
         calculationFromBrutto.calculate()
 
-        assertEquals(150000.0, calculationFromBrutto.brutto, delta)
-        assertEquals(13951.92, calculationFromBrutto.pensionInsurance, delta)
-        assertEquals(2144.25, calculationFromBrutto.disabilityInsurance, delta)
-        assertEquals(3675.0, calculationFromBrutto.sicknessInsurance, delta)
-        assertEquals(11720.59, calculationFromBrutto.healthInsurance, delta)
-        assertEquals(13282.0, calculationFromBrutto.gettingIncomeAdvance, delta)
-        assertEquals(105226.24, calculationFromBrutto.netto, delta)
+        assertAll(
+                { assertEquals(150000.0, calculationFromBrutto.brutto, delta) },
+                { assertEquals(13951.92, calculationFromBrutto.pensionInsurance, delta) },
+                { assertEquals(2144.25, calculationFromBrutto.disabilityInsurance, delta) },
+                { assertEquals(3675.0, calculationFromBrutto.sicknessInsurance, delta) },
+                { assertEquals(11720.59, calculationFromBrutto.healthInsurance, delta) },
+                { assertEquals(13282.0, calculationFromBrutto.gettingIncomeAdvance, delta) },
+                { assertEquals(105226.24, calculationFromBrutto.netto, delta) }
+        )
     }
 
 }

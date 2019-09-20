@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Locale;
 
 import pl.pregiel.workwork.R;
-import pl.pregiel.workwork.Utils;
 import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.database.services.WorkTimeService;
 import pl.pregiel.workwork.data.pojo.Work;
@@ -27,6 +26,7 @@ import pl.pregiel.workwork.data.pojo.WorkTime;
 import pl.pregiel.workwork.fragments.UpdateWorkTimeFragment;
 import pl.pregiel.workwork.utils.CustomAlert;
 import pl.pregiel.workwork.utils.FragmentOpener;
+import pl.pregiel.workwork.utils.Utils;
 
 public class WorkTimeListAdapter extends ArrayAdapter<WorkTime> {
 
@@ -64,14 +64,14 @@ public class WorkTimeListAdapter extends ArrayAdapter<WorkTime> {
             final TextView hoursText = convertView.findViewById(R.id.textView_workDetailsListElement_hours);
             if (workTime.getTimeFrom() > -1 && workTime.getTimeTo() > -1) {
                 StringBuilder builder = new StringBuilder();
-                builder.append(Utils.formatTimeAmount(getContext(), workTime.getTime()))
+                builder.append(Utils.formatTimeAmount(workTime.getTime()))
                         .append(" ")
                         .append(String.format(getContext().getString(R.string.format_timeRange),
-                                Utils.timeMinutesToString(getContext(), workTime.getTimeFrom()),
-                                Utils.timeMinutesToString(getContext(), workTime.getTimeTo())));
+                                Utils.timeMinutesToString(workTime.getTimeFrom()),
+                                Utils.timeMinutesToString(workTime.getTimeTo())));
                 hoursText.setText(builder);
             } else {
-                hoursText.setText(Utils.formatTimeAmount(getContext(), workTime.getTime()));
+                hoursText.setText(Utils.formatTimeAmount(workTime.getTime()));
             }
 
             final TextView salaryPerHour = convertView.findViewById(R.id.textView_workDetailsListElement_salaryPerHour);

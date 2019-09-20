@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import pl.pregiel.workwork.utils.ControlSetup;
 import pl.pregiel.workwork.R;
 import pl.pregiel.workwork.Settings;
-import pl.pregiel.workwork.Utils;
 import pl.pregiel.workwork.data.database.services.WorkService;
 import pl.pregiel.workwork.data.database.services.WorkTimeService;
 import pl.pregiel.workwork.data.pojo.Work;
@@ -23,6 +22,7 @@ import pl.pregiel.workwork.data.pojo.WorkTime;
 import pl.pregiel.workwork.exceptions.EmptyFieldException;
 import pl.pregiel.workwork.exceptions.ShowToastException;
 import pl.pregiel.workwork.utils.ErrorToasts;
+import pl.pregiel.workwork.utils.Utils;
 
 
 public class AddWorkTimeFragment extends FormFragment implements TaggedFragment {
