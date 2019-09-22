@@ -1,23 +1,21 @@
-package pl.pregiel.workwork.data.database;
+package pl.pregiel.workwork.data.database
 
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.content.Context
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
 
-import pl.pregiel.workwork.data.database.tables.WorkTimes;
-import pl.pregiel.workwork.data.database.tables.Works;
+import pl.pregiel.workwork.data.database.tables.WorkTimes
+import pl.pregiel.workwork.data.database.tables.Works
 
-public class DBHelper extends SQLiteOpenHelper {
-    private final static int DB_VERSION = 11;
-    private final static String DB_NAME = "WorkWork.db";
+class DBHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
-    public DBHelper(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
+    companion object {
+        private const val DB_VERSION = 11
+        private const val DB_NAME = "WorkWork.db"
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
+    override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(
                 "CREATE TABLE "
                         + Works.TABLE_NAME + " ( "
@@ -34,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         + Works.Columns.WORK_CURRENCY + " INTEGER, "
                         + WorkTimes.Columns.WORKTIME_INFO + " TEXT )"
 
-        );
+        )
         db.execSQL(
                 "CREATE TABLE "
                         + WorkTimes.TABLE_NAME + " ("
@@ -48,14 +46,13 @@ public class DBHelper extends SQLiteOpenHelper {
                         + WorkTimes.Columns.WORKTIME_INFO + " TEXT, "
                         + WorkTimes.Columns.WORKTIME_WORK_ID + " INTEGER )"
 
-        );
+        )
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + Works.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + WorkTimes.TABLE_NAME);
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.execSQL("DROP TABLE IF EXISTS " + Works.TABLE_NAME)
+        db.execSQL("DROP TABLE IF EXISTS " + WorkTimes.TABLE_NAME)
 
-        onCreate(db);
+        onCreate(db)
     }
 }

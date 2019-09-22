@@ -24,7 +24,7 @@ class CalculatorInputFragment : Fragment(), TaggedFragment {
         const val FRAGMENT_TAG = "CALCULATOR_INPUT"
     }
 
-    override fun getFragmentTag(): String = FRAGMENT_TAG
+    override fun fragmentTag(): String = FRAGMENT_TAG
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

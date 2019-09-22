@@ -27,7 +27,7 @@ class CalculatorResultFragment : Fragment(), TaggedFragment {
         const val FRAGMENT_TAG = "CALCULATOR_RESULT"
     }
 
-    override fun getFragmentTag(): String = FRAGMENT_TAG
+    override fun fragmentTag(): String = FRAGMENT_TAG
 
     private lateinit var calculation : Calculation
 

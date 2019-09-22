@@ -20,9 +20,9 @@ object Utils {
     @JvmStatic
     @Throws(NumberFormatException::class, ParseException::class)
     fun timeStringToMinutes(time: String): Int {
-        if (!time.contains(":".toRegex())) throw ParseException(time, -1)
+        if (!time.contains(":")) throw ParseException(time, -1)
 
-        val timeSplit = time.split(":".toRegex())
+        val timeSplit = time.split(":")
         val hour = timeSplit[0].toInt() * 60
         val minute = timeSplit[1].toInt()
 
